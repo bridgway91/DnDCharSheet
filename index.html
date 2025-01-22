@@ -1,55 +1,143 @@
 <!DOCTYPE html>
 <html lang="en">
 	<head>
-  	<meta charset="utf-8">
-  	<meta name="description" content="Your description goes here">
-  	<meta name="keywords" content="one, two, three">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-		
+		<meta charset="utf-8">
+		<meta name="description" content="Your description goes here">
+		<meta name="keywords" content="one, two, three">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<title>Blank Template</title>
-
 		<!-- external CSS link -->
 		<link rel="stylesheet" href="css/normalize.css">
 		<link rel="stylesheet" href="css/style.css">
 	</head>
 	<body>
-		<header> <!--Title + controls -->
+		<!--Title + controls -->
+		<header>
 			<h1>Dungeons & Dragons Character Sheet</h1>
 			<section>
 				<div>
-					<button>EDIT</button> <!--switches between edit/save -->
+					<button type="button">EDIT</button> <!--switches between edit/save -->
 				</div>
 				<div>
-					<button>IMPORT</button>
-					<button>EXPORT</button>
+					<button type="button">IMPORT</button>
+					<button type="button">EXPORT</button>
 				</div>
 			</section>
 		</header>
-		<section> <!-- Basic char info -->
-			<label for=""></label>
-			<input/>
-			<label for=""></label>
-			<input/>
-			<label for=""></label>
-			<input/>
-			<label for=""></label>
-			<input/>
-			<label for=""></label>
-			<input/>
-			<label for=""></label>
-			<input/>
-			<label for=""></label>
-			<input/>
-			<label for=""></label>
-			<input/>
-			<label for=""></label>
-			<input/>
-			<label for=""></label>
-			<input/>
+		<!-- Basic char info -->
+		<section>
+			<div>
+				<label for="characterName">Character Name</label>
+				<input id="characterName" name="characterName"/>
+				<button type="button">+ Add Class +</button>
+				<div>
+					<fieldset>
+						<legend>Class 1</legend>
+						<label for="class-1">Class</label>
+						<input id="class-1" name="class-1" type="text"/>
+						<label for="level-1">Level</label>
+						<input id="level-1" name="level-1" type="number"/>
+						<button type="button">-</button>
+					</fieldset>
+				</div>
+			</div>
+			<div>
+				<label for="race">Race</label>
+				<input id="race" name="race" type="text"/>
+				<label for="background">Background</label>
+				<input id="background" name="background" type="text"/>
+				<label for="alignment">Alignment</label>
+				<input id="alignment" name="alignment" type="text"/>
+				<label for="age">Age</label>
+				<input id="age" name="age" type="text"/>
+				<label for="height">Height</label>
+				<input id="height" name="height" type="text"/>
+				<label for="weight">Weight</label>
+				<input id="weight" name="weight" type="text"/>
+				<label for="eyes">Eyes</label>
+				<input id="eyes" name="eyes" type="text"/>
+				<label for="skin">Skin</label>
+				<input id="skin" name="skin" type="text"/>
+				<label for="hair">Hair</label>
+				<input id="hair" name="hair" type="text"/>
+			</div>
 		</section>
-		<main> <!-- Stats, Skills, everything else... -->
-
+		<!-- Stats, Skills, everything else... -->
+		<main>
+			<!-- Main Stats -->
+			<section>
+				<fieldset>
+					<legend>Strength</legend>
+					<input id="strength" name="strength" type="number"/>
+					<span>+0</span>
+				</fieldset>
+				<fieldset>
+					<legend>Dexterity</legend>
+					<input id="dexterity" name="dexterity" type="number"/>
+					<span>+0</span>
+				</fieldset>
+				<fieldset>
+					<legend>Constitution</legend>
+					<input id="constitution" name="constitution" type="number"/>
+					<span>+0</span>
+				</fieldset>
+				<fieldset>
+					<legend>Intelligence</legend>
+					<input id="intelligence" name="intelligence" type="number"/>
+					<span>+0</span>
+				</fieldset>
+				<fieldset>
+					<legend>Wisdom</legend>
+					<input id="wisdom" name="wisdom" type="number"/>
+					<span>+0</span>
+				</fieldset>
+				<fieldset>
+					<legend>Charisma</legend>
+					<input id="charisma" name="charisma" type="number"/>
+					<span>+0</span>
+				</fieldset>
+			</section>
+			<!-- Skills + Proficiencies -->
+			<section>
+				<fieldset>
+					<label for="inspiration">Inspiration</label>
+					<input id="inspiration" name="inspiration" type="checkbox"/>
+					<label for="proficiencyBonus">Proficiency Bonus</label>
+					<input id="proficiencyBonus" name="proficiencyBonus" type="number"/>
+				</fieldset>
+				<fieldset>
+					<legend>Saving Throws</legend>
+					<label for="class-1">Class</label>
+					<input id="class-1" name="class-1" type="text"/>
+					<label for="level-1">Level</label>
+					<input id="level-1" name="level-1" type="number"/>
+				</fieldset>
+				<fieldset>
+					<legend>Skills</legend>
+					<label for="class-1">Class</label>
+					<input id="class-1" name="class-1" type="text"/>
+					<label for="level-1">Level</label>
+					<input id="level-1" name="level-1" type="number"/>
+				</fieldset>
+				<fieldset>
+					<legend>Other</legend>
+					<label for="class-1">Class</label>
+					<input id="class-1" name="class-1" type="text"/>
+					<label for="level-1">Level</label>
+					<input id="level-1" name="level-1" type="number"/>
+					<button type="button">-</button>
+				</fieldset>
+			</section>
+			<!-- Combat Info + Equipment -->
+			<section></section>
+			<!-- Features -->
+			<section></section>
+			<!-- Backstory -->
+			<section></section>
+			<!-- Notes -->
+			<section></section>
 		</main>
+
 		<script type="text/javascript" src="js/main.js"></script>
 	</body>
 </html>

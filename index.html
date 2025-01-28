@@ -14,24 +14,28 @@
 		<!--Title + controls -->
 		<header>
 			<h1>Dungeons & Dragons Character Sheet</h1>
-			<section>
+			<section class="group">
 				<div>
-					<button type="button">EDIT</button> <!--switches between edit/save -->
+					<button type="button" id="edit">SAVE</button> <!--switches between edit/save -->
 				</div>
 				<div>
-					<button type="button">IMPORT</button>
-					<button type="button">EXPORT</button>
+					<button type="button" id="importChar">IMPORT</button>
+					<button type="button" id="exportChar">EXPORT</button>
 				</div>
 			</section>
 		</header>
 		<!-- Basic char info -->
-		<section>
-			<div>
-				<label for="characterName">Character Name</label>
-				<input id="characterName" name="characterName"/>
-				<button type="button">+ Add Class +</button>
+		<section class="basicInfo group">
+			<div class="nameClasses">
 				<div>
-					<fieldset>
+					<div>
+						<label for="characterName">Character Name</label>
+						<input id="characterName" name="characterName"/>
+					</div>
+					<button type="button">+ Add Class +</button>
+				</div>
+				<div>
+					<fieldset id="characterClasses">
 						<legend>Class 1</legend>
 						<label for="class-1">Class</label>
 						<input id="class-1" name="class-1" type="text"/>
@@ -41,7 +45,7 @@
 					</fieldset>
 				</div>
 			</div>
-			<div>
+			<div class="identifyingInfo">
 				<label for="race">Race</label>
 				<input id="race" name="race" type="text"/>
 				<label for="background">Background</label>
@@ -65,7 +69,7 @@
 		<!-- Stats, Skills, everything else... -->
 		<main>
 			<!-- Main Stats -->
-			<section>
+			<section class="mainStats group">
 				<fieldset>
 					<legend>Strength</legend>
 					<input id="strength" name="strength" type="number"/>
@@ -98,7 +102,7 @@
 				</fieldset>
 			</section>
 			<!-- Skills + Proficiencies -->
-			<section>
+			<section class="skillsProficiencies group">
 				<fieldset>
 					<label for="inspiration">Inspiration</label>
 					<input id="inspiration" name="inspiration" type="checkbox"/>

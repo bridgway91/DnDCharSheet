@@ -33,3 +33,46 @@ class Character {
 }
 
 let myChar = new Character()
+
+/////////////////////////////////////////////////
+
+const editInfo = document.querySelector('#edit')
+const imChar = document.querySelector('#importChar')
+const exChar = document.querySelector('#exportChar')
+
+const charName = document.querySelector('#characterName')
+const charClasses = document.querySelector('#characterClasses')
+const charRace = document.querySelector('#race')
+const charBackground = document.querySelector('#background')
+const charAlignment = document.querySelector('#alignment')
+const charAge = document.querySelector('#age')
+const charHeight = document.querySelector('#height')
+const charWeight = document.querySelector('#weight')
+const charEyes = document.querySelector('#eyes')
+const charSkin = document.querySelector('#skin')
+const charHair = document.querySelector('#hair')
+
+/////////////////////////////////////////////////
+
+editInfo.addEventListener('click',editOrSave)
+
+/////////////////////////////////////////////////
+
+function editOrSave() {
+    // if wanting to edit, run editCharInfo(), or if saving, run saveCharInfo()
+    editInfo.innerHTML = editInfo.innerHTML == 'SAVE' ? 'EDIT' : 'SAVE'
+    console.log(myChar)
+    myChar.name = charName.value
+    //myChar.class...
+    myChar.characteristics = [charAge.value,charHeight.value,charWeight.value,charEyes.value,charSkin.value,charHair.value]
+    myChar.race = charRace.value
+    myChar.background = charBackground.value
+    myChar.alignment = charAlignment.value
+    console.log(myChar)
+    const allInput = document.querySelectorAll('input')
+    // console.log(allInput)
+    localStorage.setItem('character',JSON.stringify(myChar))
+    for (let i of allInput) {
+        i.disabled = true
+    }
+}

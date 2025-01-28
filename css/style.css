@@ -2,7 +2,6 @@
 * {
   box-sizing: border-box;
 }
-
 /* Clear fix hack */
 .clearfix:after {
      content: ".";
@@ -12,31 +11,78 @@
      line-height: 0;
      height: 0;
 }
-
 .clear {
 	clear: both;
 }
 
 /******************************************
-/* BASE STYLES
+/* ^ "HACKS"
+/* v BASE STYLES
 /*******************************************/
 
 body {
-
+  padding: 2rem;
+}
+.group {
+  display: flex;
+  border: 2px solid black;
+  padding: 0.5rem;
+  justify-content: space-around;
+  margin: 0.5rem 0;
 }
 
-
 /******************************************
-/* LAYOUT
+/* ^ BASE STYLES
+/* v HEADER
 /*******************************************/
+
 header {
-
+  padding-bottom: 0.5rem;
+  margin-bottom: 0.5rem;
+  border-bottom: 5px solid black;
 }
-
-footer {
-
+h1 {
+  display: flex;
+  justify-content: center;
+}
+header .group {
+  justify-content: space-between;
 }
 
 /******************************************
-/* ADDITIONAL STYLES
+/* ^ HEADER
+/* v BASIC CHAR INFO
 /*******************************************/
+
+.basicInfo {
+  margin-bottom: 0.5rem;
+}
+.nameClasses {
+  width: 40%;
+  display: flex;
+  flex-wrap: wrap;
+  padding-right: 1rem;
+}
+.nameClasses > div:first-child {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+.nameClasses > div:last-child {
+  width: 100%;
+}
+.identifyingInfo {
+  width: 60%;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr 2fr);
+  gap: 0.25rem 1rem;
+}
+
+/******************************************
+/* ^ BASIC CHAR INFO
+/* v MAIN STATS
+/*******************************************/
+
+.mainStats {
+
+}

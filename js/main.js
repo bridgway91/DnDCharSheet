@@ -10,10 +10,10 @@ class Character {
         this.proficiency = 2
         this.saves = [] // line up boolean w/ stats, 0 for not prof, 1 for prof
         this.skills = [] // array of skills, NOT BOOLEAN, instead 0/1/2 for * prof bonus (to account for expertise)
-        this.weapons = [] // array of strings of weapon names, tho mainly simple / martial
-        this.armor = []
-        this.tools = []
-        this.languages = []
+        this.weapons = '' // strings of weapon names, tho mainly simple / martial
+        this.armor = ''
+        this.tools = ''
+        this.languages = ''
         this.armor = 10
         this.initiative = 0
         this.speed = 30

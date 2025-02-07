@@ -41,7 +41,7 @@
 						<input id="class-1" name="class-1" type="text"/>
 						<label for="level-1">Level</label>
 						<input id="level-1" name="level-1" type="number"/>
-						<button type="button">-</button>
+						<button type="button" class="removeOption">-</button>
 					</fieldset>
 				</div>
 			</div>
@@ -202,7 +202,7 @@
 				</section>
 				<!-- Combat Info + Equipment -->
 				<section class="combatEquip group">
-					<div id="health">
+					<div id="life">
 						<div id="topMiddle">
 							<fieldset>
 								<legend>Armor Class</legend>
@@ -217,51 +217,132 @@
 								<input id="speed" name="speed" type="number"/>
 							</fieldset>
 						</div>
-						<fieldset>
-							<legend>Health</legend>
-							<label for="hpMax">Hit Point Max</label>
+						<fieldset id="health">
+							<legend>Health (HP)</legend>
+							<label for="hpMax">Maximum</label>
 							<input id="hpMax" name="hpMax" type="number"/>
-							<label for="hpCurrent">Hit Point Current</label>
+							<label for="hpCurrent">Current</label>
 							<input id="hpCurrent" name="hpCurrent" type="number"/>
-							<label for="hpTemp">Hit Point Temp</label>
+							<label for="hpTemp">Temporary</label>
 							<input id="hpTemp" name="hpTemp" type="number"/>
 						</fieldset>
-						<fieldset>
+						<fieldset id="hitDice">
 							<legend>Hit Dice</legend>
-
+							<div id="hdHeader">
+								<span>Current</span>
+								<span>Max + Size</span>
+							</div>
+							<div id="hitDiceWrapper">
+								<div>
+									<input type="number"/>
+									<input type="text"/>
+								</div>
+							</div>
+							<button type="button" id="addHitDie" class="addOption">+</button>
 						</fieldset>
-						<fieldset>
+						<fieldset id="deathSaves">
 							<legend>Death Saves</legend>
 							<div>
 								<span>Success</span>
-								<input type="checkbox"/>
-								<input type="checkbox"/>
-								<input type="checkbox"/>
+								<div>
+									<input type="checkbox"/>
+									<input type="checkbox"/>
+									<input type="checkbox"/>
+								</div>
 							</div>
 							<div>
 								<span>Fail</span>
-								<input type="checkbox"/>
-								<input type="checkbox"/>
-								<input type="checkbox"/>
+								<div>
+									<input type="checkbox"/>
+									<input type="checkbox"/>
+									<input type="checkbox"/>
+								</div>
 							</div>
 						</fieldset>
 					</div>
 					<div id="attacks">
 						<fieldset>
 							<legend>Attacks</legend>
+							<table>
+								<thead>
+									<tr>
+										<th scope="col">Name</th>
+										<th scope="col">Atk Bonus</th>
+										<th scope="col">Damage / Type</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td><input type="text"/></td>
+										<td><input type="number"/></td>
+										<td><input type="text"/></td>
+									</tr>
+								</tbody>
+							</table>
+							<button type="button" class="addOption">+</button>
 						</fieldset>
 					</div>
 					<div id="equipment">
 						<fieldset>
 							<legend>Equipment</legend>
+							<div id="money">
+								<table>
+									<thead>
+										<tr>
+											<th scope="col">PP</th>
+											<th scope="col">GP</th>
+											<th scope="col">EP</th>
+											<th scope="col">SP</th>
+											<th scope="col">CP</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr>
+											<td><input type="number"/></td>
+											<td><input type="number"/></td>
+											<td><input type="number"/></td>
+											<td><input type="number"/></td>
+											<td><input type="number"/></td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+							<div id="items">
+								<div id="itemsHeader">
+									<span>#</span>
+									<span>Description</span>
+								</div>
+								<div id="itemsWrapper">
+									<div>
+										<input type="number"/>
+										<input type="text"/>
+									</div>
+								</div>
+								<button type="button" class="addOption">+</button>
+							</div>
 						</fieldset>
 					</div>
 				</section>
 				<!-- Features -->
-				<section class="features group">
-					<fieldset>
-						<legend>Features</legend>
-					</fieldset>
+				<section class="trackfeatures group">
+					<div>
+						<fieldset>
+							<legend>Trackers</legend>
+							<div id="trackers">
+	
+							</div>
+							<button type="button" class="addOption">+</button>
+						</fieldset>
+					</div>
+					<div>
+						<fieldset>
+							<legend>Features</legend>
+							<div id="features">
+	
+							</div>
+							<button type="button" class="addOption">+</button>
+						</fieldset>
+					</div>
 				</section>
 			</div>
 

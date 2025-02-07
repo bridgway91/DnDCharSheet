@@ -145,7 +145,7 @@ header .group {
 
 .skillsProficiencies,
 .combatEquip,
-.features {
+.trackfeatures {
   width: 33%;
   flex-wrap: wrap;
 }
@@ -197,13 +197,182 @@ header .group {
 
 /******************************************
 /* ^ SKILLS + PROFS
-/* v COMBAT + EQUIPMENT
+/* v LIFE
 /*******************************************/
 
-#health {
-  border-bottom: 1px solid black;
+.combatEquip {
+  align-items: flex-start;
+}
+#life {
+  border-bottom: 3px solid black;
+  padding-bottom: 1rem;
+  width: 100%;
+  height: fit-content;
+}
+#topMiddle {
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+  padding-bottom: 0.5rem;
+}
+#topMiddle fieldset {
+  display: flex;
+  justify-content: center;
+  border: 1px solid black;
+}
+#topMiddle legend {
+  text-align: center;
+}
+#topMiddle input {
+  width: 3rem;
+  height: 3rem;
+  font-size: 2rem;
+  text-align: center;
 }
 
+#health {
+  width: 100%;
+  display: grid;
+  grid-template-columns: auto auto;
+  justify-content: space-between;
+  column-gap: 0.5rem;
+  margin-bottom: 0.5rem;
+  border: 1px solid black;
+}
+#health input {
+  width: 100%;
+  text-align: center;
+}
+#health label[for="hpCurrent"],
+#health input[name="hpCurrent"] {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+#hitDice {
+  margin-bottom: 0.5rem;
+  border: 1px solid black;
+}
+#hdHeader {
+  display: grid;
+  justify-content: space-between;
+  grid-template-columns: auto auto;
+  width: 100%;
+}
+#hitDiceWrapper {
+  width: 100%;
+}
+#hitDiceWrapper > div {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+#hitDiceWrapper input {
+  width: 40%;
+  text-align: center;
+}
+.addOption {
+  width: 100%;
+  margin: 0.5rem 0;
+  height: 1rem;
+  font-size: 0.75rem;
+  font-weight: bold;
+  text-align: center;
+  align-content: center;
+}
+
+#deathSaves {
+  margin-bottom: 0.5rem;
+  border: 1px solid black;
+}
+#deathSaves > div {
+  display: grid;
+  grid-template-columns: auto auto;
+  justify-content: space-between;
+}
+
+/******************************************
+/* ^ LIFE
+/* v ATTACKS
+/*******************************************/
+
 #attacks {
+  width: 100%;
+  padding: 1rem 0;
+  border-bottom: 3px solid black;
+}
+#attacks fieldset,
+#equipment fieldset {
+  border: 1px solid black;
+  width: 100%;
+}
+#attacks input {
+  width: 100%;
+  text-align: center;
+}
+#attacks table,
+#money table {
+  table-layout: fixed;
+  width: 100%;
+  border-collapse: collapse;
+}
+#attacks thead,
+#money thead {
+  font-size: 0.8rem;
+  font-weight: normal;
+}
+#attacks thead th:nth-child(1),
+#attacks thead th:nth-child(3) {
+  width: 35%;
+}
+#attacks thead th:nth-child(2) {
+  width: 20%;
+}
+
+/******************************************
+/* ^ ATTACKS
+/* v EQUIPMENT
+/*******************************************/
+
+#equipment {
+  width: 100%;
+}
+#money {
+  padding-bottom: 0.75rem;
   border-bottom: 1px solid black;
+  margin-bottom: 0.75rem;
+}
+#money input{
+  width: 100%;
+}
+#itemsHeader {
+  padding: 0 1rem;
+  display: grid;
+  grid-template-columns: auto auto;
+  justify-content: space-between;
+}
+#itemsWrapper div {
+  display: grid;
+  grid-template-columns: 20% 80%;
+  justify-content: space-between;
+}
+#itemsWrapper input[type="number"],
+#itemsWrapper input[type="text"] {
+  width: 100%;
+}
+
+/******************************************
+/* ^ EQUIPMENT
+/* v TRACKERS
+/*******************************************/
+
+.trackfeatures {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+.trackfeatures > div:first-child {
+  padding-bottom: 0.75rem;
+  border-bottom: 3px solid black;
+  margin-bottom: 0.75rem;
 }

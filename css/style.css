@@ -35,6 +35,17 @@ input::-webkit-inner-spin-button,
 input::-webkit-outer-spin-button {
   -webkit-appearance: none;
 }
+.addOption {
+  width: 100%;
+  margin: 0.5rem 0;
+  height: 1rem;
+  font-size: 0.75rem;
+  font-weight: bold;
+  text-align: center;
+  align-content: center;
+  align-items: center;
+  box-shadow: 0 0 2px black;
+}
 
 /******************************************
 /* ^ BASE STYLES
@@ -62,28 +73,45 @@ header .group {
 
 .basicInfo {
   margin-bottom: 0.5rem;
+  border-top-left-radius: 2rem;
+  border-top-right-radius: 2rem;
 }
 .nameClasses {
   width: 40%;
   display: flex;
   flex-wrap: wrap;
-  padding-right: 1rem;
+  padding: 1rem;
   border-right: 1px solid black;
 }
-.nameClasses > div:first-child {
+.nameClasses > div {
   display: flex;
   justify-content: space-between;
   width: 100%;
 }
-.nameClasses > div:last-child {
-  width: 100%;
-  padding-top: 1rem;
+.nameClasses > div div {
+  font-size: 1.25rem;
 }
-.nameClasses > div:last-child input[type='text'] {
+.nameClasses > div input {
+  text-align: center;
+}
+#classes {
+  width: 100%;
+  padding: 1rem;
+  margin-top: 1rem;
+  border: 1px solid black;
+  box-shadow: 0 0 5px black;
+}
+#classes div {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+#classes input[type='text'] {
   width: 45%;
 }
-.nameClasses > div:last-child input[type='number'] {
+#classes input[type='number'] {
   width: 15%;
+  text-align: center;
 }
 .identifyingInfo {
   width: 60%;
@@ -153,6 +181,7 @@ header .group {
   border: 1px solid black;
   margin: 0.5rem 0;
   font-size: 0.8rem;
+  /* box-shadow: 2px 2px 2px black; */
 }
 .skillsProficiencies legend {
   font-size: 1rem;
@@ -171,6 +200,7 @@ header .group {
 #topleft input[type="number"] {
   width: 4rem;
   line-height: 1.25rem;
+  text-align: center;
 }
 
 #saves, #skills {
@@ -187,6 +217,12 @@ header .group {
 #skills input[type=number] {
   width: 4rem;
   text-align: center;
+}
+#skills span {
+  padding-left: 0.5rem;
+  color: gray;
+  font-size: 0.8rem;
+  align-items: center;
 }
 
 #other {
@@ -219,6 +255,7 @@ header .group {
   display: flex;
   justify-content: center;
   border: 1px solid black;
+  border-radius: 20%;
 }
 #topMiddle legend {
   text-align: center;
@@ -238,6 +275,7 @@ header .group {
   column-gap: 0.5rem;
   margin-bottom: 0.5rem;
   border: 1px solid black;
+  box-shadow: 0 3px 3px black;
 }
 #health input {
   width: 100%;
@@ -271,15 +309,7 @@ header .group {
   width: 40%;
   text-align: center;
 }
-.addOption {
-  width: 100%;
-  margin: 0.5rem 0;
-  height: 1rem;
-  font-size: 0.75rem;
-  font-weight: bold;
-  text-align: center;
-  align-content: center;
-}
+
 
 #deathSaves {
   margin-bottom: 0.5rem;
@@ -344,9 +374,9 @@ header .group {
 }
 #money input{
   width: 100%;
+  text-align: center;
 }
 #itemsHeader {
-  padding: 0 1rem;
   display: grid;
   grid-template-columns: auto auto;
   justify-content: space-between;
@@ -360,10 +390,13 @@ header .group {
 #itemsWrapper input[type="text"] {
   width: 100%;
 }
+#itemsWrapper input[type="text"] {
+  text-align: end;
+}
 
 /******************************************
 /* ^ EQUIPMENT
-/* v TRACKERS
+/* v TRACKERS + FEATURES
 /*******************************************/
 
 .trackfeatures {
@@ -375,4 +408,166 @@ header .group {
   padding-bottom: 0.75rem;
   border-bottom: 3px solid black;
   margin-bottom: 0.75rem;
+}
+.trackfeatures fieldset {
+  border: 1px solid black;
+}
+
+#trackers {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+#trackers div {
+  padding: 0.5rem;
+  width: 45%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  border: 1px solid gray;
+}
+#trackers input[type="text"] {
+  width: 100%;
+  margin-bottom: 0.5rem;
+  text-align: center;
+}
+#trackers input[type="number"] {
+  width: 40%;
+  font-size: 2rem;
+  text-align: center;
+}
+
+#features {
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+}
+#features div {
+  padding: 0.5rem;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  border: 1px solid gray;
+}
+#features textarea {
+  margin-top: 0.5rem;
+  min-width: 100%;
+  resize: none;
+  height: fit-content;
+  font-size: 0.8rem;
+}
+.featSource {
+  text-align: end;
+}
+
+/******************************************
+/* ^ TRACKERS + FEATURES
+/* v SPELLCASTING
+/*******************************************/
+
+.spellcasting {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  padding: 0 2rem 2rem 2rem;
+}
+#spellMeta {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  justify-content: space-between;
+  width: 100%;
+  column-gap: 2rem;
+  text-align: center;
+  padding-bottom: 1rem;
+  border-bottom: 3px solid black;
+  margin-bottom: 1rem;
+}
+#spellMeta input {
+  font-size: 1.25rem;
+  border-radius: 1rem;
+  text-align: center;
+}
+#spellMeta label {
+  font-size: 0.8rem;
+}
+.spellcasting fieldset {
+  width: 100%;
+  margin-bottom: 0.5rem;
+  border: 1px solid black;
+  box-shadow: 5px 5px 5px black;
+}
+.spells legend {
+  font-weight: bold;
+}
+.spells legend input {
+  width: 2rem;
+  text-align: center;
+}
+.spells div {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  row-gap: 0.25rem;
+  padding-bottom: 0.5rem;
+  margin-bottom: 0.25rem;
+  border-bottom: 1px solid gray;
+}
+.spells div:last-child {
+  border-bottom: none;
+}
+.spells textarea {
+  width: 100%;
+  resize: none;
+  height: fit-content;
+  font-size: 0.8rem;
+}
+.spells .addOption,
+.notes .addOption {
+  width: 50%;
+  margin: 0 25%;
+}
+
+/******************************************
+/* ^ SPELLCASTING
+/* v BACKSTORY
+/*******************************************/
+
+.backstory {
+  display: flex;
+  flex-wrap: wrap;
+}
+.backstory textarea {
+  width: 100%;
+  margin: 0 2rem 2rem 2rem;
+  padding: 1rem;
+  resize: none;
+  border: 1px solid black;
+  box-shadow: 2px 2px 5px black;
+}
+
+/******************************************
+/* ^ BACKSTORY
+/* v CAMPAIGN NOTES
+/*******************************************/
+
+.notes {
+  display: flex;
+  flex-wrap: wrap;
+  padding-bottom: 2rem;
+  border-bottom-right-radius: 2rem;
+  border-bottom-left-radius: 2rem;
+}
+#campaignNotes {
+  width: 100%;
+  padding: 0 2rem 2rem 2rem;
+}
+#campaignNotes textarea {
+  width: 100%;
+  padding: 1rem;
+  resize: none;
+  border: 1px solid black;
+  box-shadow: 2px 2px 5px black;
 }

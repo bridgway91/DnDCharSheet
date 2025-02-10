@@ -30,40 +30,39 @@
 				<div>
 					<div>
 						<label for="characterName">Character Name</label>
-						<input id="characterName" name="characterName"/>
+						<input id="characterName" name="characterName" placeholder="John Smith"/>
 					</div>
 					<button type="button">Add Class</button>
 				</div>
-				<div id="characterClasses">
-					<fieldset id="c1">
-						<legend>Class 1</legend>
-						<label for="class-1">Class</label>
-						<input id="class-1" name="class-1" type="text"/>
-						<label for="level-1">Level</label>
-						<input id="level-1" name="level-1" type="number"/>
+				<fieldset id="classes">
+					<div>
+						<label>Class</label>
+						<input type="text" placeholder="Warrior"/>
+						<label>Level</label>
+						<input type="number" placeholder="1"/>
 						<button type="button" class="removeOption">-</button>
-					</fieldset>
-				</div>
+					</div>
+				</fieldset>
 			</div>
 			<div class="identifyingInfo">
 				<label for="race">Race</label>
-				<input id="race" name="race" type="text"/>
+				<input id="race" name="race" type="text" placeholder="Human"/>
 				<label for="background">Background</label>
-				<input id="background" name="background" type="text"/>
+				<input id="background" name="background" type="text" placeholder="Folk Hero"/>
 				<label for="alignment">Alignment</label>
-				<input id="alignment" name="alignment" type="text"/>
+				<input id="alignment" name="alignment" type="text" placeholder="Lawful Good"/>
 				<label for="age">Age</label>
-				<input id="age" name="age" type="text"/>
+				<input id="age" name="age" type="text" placeholder="32"/>
 				<label for="height">Height</label>
-				<input id="height" name="height" type="text"/>
+				<input id="height" name="height" type="text" placeholder="5'11''"/>
 				<label for="weight">Weight</label>
-				<input id="weight" name="weight" type="text"/>
+				<input id="weight" name="weight" type="text" placeholder="180"/>
 				<label for="eyes">Eyes</label>
-				<input id="eyes" name="eyes" type="text"/>
+				<input id="eyes" name="eyes" type="text" placeholder="Blue"/>
 				<label for="skin">Skin</label>
-				<input id="skin" name="skin" type="text"/>
+				<input id="skin" name="skin" type="text" placeholder="Tan"/>
 				<label for="hair">Hair</label>
-				<input id="hair" name="hair" type="text"/>
+				<input id="hair" name="hair" type="text" placeholder="Brown"/>
 			</div>
 		</section>
 		<!-- Stats, Skills, everything else... -->
@@ -72,32 +71,32 @@
 			<section class="mainStats group">
 				<fieldset>
 					<legend>Strength</legend>
-					<input id="strength" name="strength" type="number"/>
+					<input id="strength" name="strength" type="number" placeholder="10"/>
 					<span id="strBonus">+0</span>
 				</fieldset>
 				<fieldset>
 					<legend>Dexterity</legend>
-					<input id="dexterity" name="dexterity" type="number"/>
+					<input id="dexterity" name="dexterity" type="number" placeholder="10"/>
 					<span id="dexBonus">+0</span>
 				</fieldset>
 				<fieldset>
 					<legend>Constitution</legend>
-					<input id="constitution" name="constitution" type="number"/>
+					<input id="constitution" name="constitution" type="number" placeholder="10"/>
 					<span id="conBonus">+0</span>
 				</fieldset>
 				<fieldset>
 					<legend>Intelligence</legend>
-					<input id="intelligence" name="intelligence" type="number"/>
+					<input id="intelligence" name="intelligence" type="number" placeholder="10"/>
 					<span id="intBonus">+0</span>
 				</fieldset>
 				<fieldset>
 					<legend>Wisdom</legend>
-					<input id="wisdom" name="wisdom" type="number"/>
+					<input id="wisdom" name="wisdom" type="number" placeholder="10"/>
 					<span id="wisBonus">+0</span>
 				</fieldset>
 				<fieldset>
 					<legend>Charisma</legend>
-					<input id="charisma" name="charisma" type="number"/>
+					<input id="charisma" name="charisma" type="number" placeholder="10"/>
 					<span id="chaBonus">+0</span>
 				</fieldset>
 			</section>
@@ -108,96 +107,96 @@
 						<label for="inspiration">Inspiration</label>
 						<input id="inspiration" name="inspiration" type="checkbox"/>
 						<label for="proficiencyBonus">Proficiency Bonus</label>
-						<input id="proficiencyBonus" name="proficiencyBonus" type="number"/>
+						<input id="proficiencyBonus" name="proficiencyBonus" type="number" placeholder="2"/>
 					</fieldset>
 					<fieldset id="saves">
 						<legend>Saving Throws</legend>
-						<input type="checkbox"/>
+						<input type="checkbox" checked/>
 						<label for="strSave">Strength</label>
-						<input id="strSave" name="strSave" type="number"/>
-						<input type="checkbox"/>
+						<input id="strSave" name="strSave" type="number" placeholder="2"/>
+						<input type="checkbox" checked/>
 						<label for="dexSave">Dexterity</label>
-						<input id="dexSave" name="dexSave" type="number"/>
+						<input id="dexSave" name="dexSave" type="number" placeholder="2"/>
 						<input type="checkbox"/>
 						<label for="conSave">Constitution</label>
-						<input id="conSave" name="conSave" type="number"/>
+						<input id="conSave" name="conSave" type="number" placeholder="0"/>
 						<input type="checkbox"/>
 						<label for="intSave">Intelligence</label>
-						<input id="intSave" name="intSave" type="number"/>
+						<input id="intSave" name="intSave" type="number" placeholder="0"/>
 						<input type="checkbox"/>
 						<label for="wisSave">Wisdom</label>
-						<input id="wisSave" name="wisSave" type="number"/>
+						<input id="wisSave" name="wisSave" type="number" placeholder="0"/>
 						<input type="checkbox"/>
 						<label for="chaSave">Charisma</label>
-						<input id="chaSave" name="chaSave" type="number"/>
+						<input id="chaSave" name="chaSave" type="number" placeholder="0"/>
 					</fieldset>
 					<fieldset id="skills">
 						<legend>Skills</legend>
 						<input type="checkbox"/>
-						<label for="acrobatics">Acrobatics</label>
-						<input id="acrobatics" name="acrobatics" type="number"/>
+						<label for="acrobatics">Acrobatics<span class="stat">(Dex)</span></label>
+						<input id="acrobatics" name="acrobatics" type="number" placeholder="0"/>
 						<input type="checkbox"/>
-						<label for="animalHandling">Animal Handling</label>
-						<input id="animalHandling" name="animalHandling" type="number"/>
+						<label for="animalHandling">Animal Handling<span class="stat">(Wis)</span></label>
+						<input id="animalHandling" name="animalHandling" type="number" placeholder="0"/>
 						<input type="checkbox"/>
-						<label for="arcana">Arcana</label>
-						<input id="arcana" name="arcana" type="number"/>
+						<label for="arcana">Arcana<span class="stat">(Int)</span></label>
+						<input id="arcana" name="arcana" type="number" placeholder="0"/>
+						<input type="checkbox" checked/>
+						<label for="athletics">Athletics<span class="stat">(Str)</span></label>
+						<input id="athletics" name="athletics" type="number" placeholder="2"/>
 						<input type="checkbox"/>
-						<label for="athletics">Athletics</label>
-						<input id="athletics" name="athletics" type="number"/>
+						<label for="deception">Deception<span class="stat">(Cha)</span></label>
+						<input id="deception" name="deception" type="number" placeholder="0"/>
 						<input type="checkbox"/>
-						<label for="deception">Deception</label>
-						<input id="deception" name="deception" type="number"/>
+						<label for="history">History<span class="stat">(Int)</span></label>
+						<input id="history" name="history" type="number" placeholder="0"/>
 						<input type="checkbox"/>
-						<label for="history">History</label>
-						<input id="history" name="history" type="number"/>
+						<label for="insight">Insight<span class="stat">(Wis)</span></label>
+						<input id="insight" name="insight" type="number" placeholder="0"/>
 						<input type="checkbox"/>
-						<label for="insight">Insight</label>
-						<input id="insight" name="insight" type="number"/>
+						<label for="intimidation">Intimidation<span class="stat">(Cha)</span></label>
+						<input id="intimidation" name="intimidation" type="number" placeholder="0"/>
 						<input type="checkbox"/>
-						<label for="intimidation">Intimidation</label>
-						<input id="intimidation" name="intimidation" type="number"/>
+						<label for="investigation">Investigation<span class="stat">(Int)</span></label>
+						<input id="investigation" name="investigation" type="number" placeholder="0"/>
 						<input type="checkbox"/>
-						<label for="investigation">Investigation</label>
-						<input id="investigation" name="investigation" type="number"/>
+						<label for="medicine">Medicine<span class="stat">(Wis)</span></label>
+						<input id="medicine" name="medicine" type="number" placeholder="0"/>
 						<input type="checkbox"/>
-						<label for="medicine">Medicine</label>
-						<input id="medicine" name="medicine" type="number"/>
+						<label for="nature">Nature<span class="stat">(Int)</span></label>
+						<input id="nature" name="nature" type="number" placeholder="0"/>
 						<input type="checkbox"/>
-						<label for="nature">Nature</label>
-						<input id="nature" name="nature" type="number"/>
+						<label for="perception">Perception<span class="stat">(Wis)</span></label>
+						<input id="perception" name="perception" type="number" placeholder="0"/>
 						<input type="checkbox"/>
-						<label for="perception">Perception</label>
-						<input id="perception" name="perception" type="number"/>
+						<label for="performance">Performance<span class="stat">(Cha)</span></label>
+						<input id="performance" name="performance" type="number" placeholder="0"/>
+						<input type="checkbox" checked/>
+						<label for="persuasion">Persuasion<span class="stat">(Cha)</span></label>
+						<input id="persuasion" name="persuasion" type="number" placeholder="2"/>
 						<input type="checkbox"/>
-						<label for="performance">Performance</label>
-						<input id="performance" name="performance" type="number"/>
+						<label for="religion">Religion<span class="stat">(Int)</span></label>
+						<input id="religion" name="religion" type="number" placeholder="0"/>
 						<input type="checkbox"/>
-						<label for="persuasion">Persuasion</label>
-						<input id="persuasion" name="persuasion" type="number"/>
+						<label for="sleightOfHand">Sleight of Hand<span class="stat">(Dex)</span></label>
+						<input id="sleightOfHand" name="sleightOfHand" type="number" placeholder="0"/>
 						<input type="checkbox"/>
-						<label for="religion">Religion</label>
-						<input id="religion" name="religion" type="number"/>
-						<input type="checkbox"/>
-						<label for="sleightOfHand">Sleight of Hand</label>
-						<input id="sleightOfHand" name="sleightOfHand" type="number"/>
-						<input type="checkbox"/>
-						<label for="stealth">Stealth</label>
-						<input id="stealth" name="stealth" type="number"/>
-						<input type="checkbox"/>
-						<label for="survival">Survival</label>
-						<input id="survival" name="survival" type="number"/>
+						<label for="stealth">Stealth<span class="stat">(Dex)</span></label>
+						<input id="stealth" name="stealth" type="number" placeholder="0"/>
+						<input type="checkbox" checked/>
+						<label for="survival">Survival<span class="stat">(Wis)</span></label>
+						<input id="survival" name="survival" type="number" placeholder="2"/>
 					</fieldset>
 					<fieldset id="other">
 						<legend>Other</legend>
 						<label for="weaponProf">Weapon Prof.</label>
-						<input id="weaponProf" name="weaponProf" type="text"/>
+						<input id="weaponProf" name="weaponProf" type="text" placeholder="Simple, Martial"/>
 						<label for="armorProf">Armor Prof.</label>
-						<input id="armorProf" name="armorProf" type="text"/>
+						<input id="armorProf" name="armorProf" type="text" placeholder="Light, Medium, Heavy, Shields"/>
 						<label for="toolProf">Tool Prof.</label>
-						<input id="toolProf" name="toolProf" type="text"/>
+						<input id="toolProf" name="toolProf" type="text" placeholder="None"/>
 						<label for="languageProf">Language Prof.</label>
-						<input id="languageProf" name="languageProf" type="text"/>
+						<input id="languageProf" name="languageProf" type="text" placeholder="Common, Abyssal"/>
 					</fieldset>
 				</section>
 				<!-- Combat Info + Equipment -->
@@ -206,25 +205,25 @@
 						<div id="topMiddle">
 							<fieldset>
 								<legend>Armor Class</legend>
-								<input id="armorClass" name="armorClass" type="number"/>
+								<input id="armorClass" name="armorClass" type="number" placeholder="10"/>
 							</fieldset>
 							<fieldset>
 								<legend>Initiative</legend>
-								<input id="initiative" name="initiative" type="number"/>
+								<input id="initiative" name="initiative" type="number" placeholder="0"/>
 							</fieldset>
 							<fieldset>
 								<legend>Speed</legend>
-								<input id="speed" name="speed" type="number"/>
+								<input id="speed" name="speed" type="number" placeholder="30"/>
 							</fieldset>
 						</div>
 						<fieldset id="health">
 							<legend>Health (HP)</legend>
 							<label for="hpMax">Maximum</label>
-							<input id="hpMax" name="hpMax" type="number"/>
+							<input id="hpMax" name="hpMax" type="number" placeholder="10"/>
 							<label for="hpCurrent">Current</label>
-							<input id="hpCurrent" name="hpCurrent" type="number"/>
+							<input id="hpCurrent" name="hpCurrent" type="number" placeholder="8"/>
 							<label for="hpTemp">Temporary</label>
-							<input id="hpTemp" name="hpTemp" type="number"/>
+							<input id="hpTemp" name="hpTemp" type="number" placeholder="0"/>
 						</fieldset>
 						<fieldset id="hitDice">
 							<legend>Hit Dice</legend>
@@ -234,8 +233,8 @@
 							</div>
 							<div id="hitDiceWrapper">
 								<div>
-									<input type="number"/>
-									<input type="text"/>
+									<input type="number" placeholder="1"/>
+									<input type="text" placeholder="1d10"/>
 								</div>
 							</div>
 							<button type="button" id="addHitDie" class="addOption">+</button>
@@ -273,9 +272,9 @@
 								</thead>
 								<tbody>
 									<tr>
-										<td><input type="text"/></td>
-										<td><input type="number"/></td>
-										<td><input type="text"/></td>
+										<td><input type="text" placeholder="Unarmed Strike"/></td>
+										<td><input type="number" placeholder="2"/></td>
+										<td><input type="text" placeholder="1d4+2 B"/></td>
 									</tr>
 								</tbody>
 							</table>
@@ -298,11 +297,11 @@
 									</thead>
 									<tbody>
 										<tr>
-											<td><input type="number"/></td>
-											<td><input type="number"/></td>
-											<td><input type="number"/></td>
-											<td><input type="number"/></td>
-											<td><input type="number"/></td>
+											<td><input type="number" placeholder="0"/></td>
+											<td><input type="number" placeholder="10"/></td>
+											<td><input type="number" placeholder="0"/></td>
+											<td><input type="number" placeholder="0"/></td>
+											<td><input type="number" placeholder="0"/></td>
 										</tr>
 									</tbody>
 								</table>
@@ -314,8 +313,8 @@
 								</div>
 								<div id="itemsWrapper">
 									<div>
-										<input type="number"/>
-										<input type="text"/>
+										<input type="number" placeholder="1"/>
+										<input type="text" placeholder="Backpack"/>
 									</div>
 								</div>
 								<button type="button" class="addOption">+</button>
@@ -329,7 +328,18 @@
 						<fieldset>
 							<legend>Trackers</legend>
 							<div id="trackers">
-	
+								<div>
+									<input type="text" placeholder="Daily Use"/>
+									<input type="number" placeholder="1"/>
+									<span>/</span>
+									<input type="number" placeholder="1"/>
+								</div>
+								<div>
+									<input type="text" placeholder="Daily Use"/>
+									<input type="number" placeholder="1"/>
+									<span>/</span>
+									<input type="number" placeholder="1"/>
+								</div>
 							</div>
 							<button type="button" class="addOption">+</button>
 						</fieldset>
@@ -338,21 +348,153 @@
 						<fieldset>
 							<legend>Features</legend>
 							<div id="features">
-	
+								<div>
+									<input type="text" placeholder="Feature">
+									<input type="text" class="featSource" placeholder="Source">
+									<textarea rows="4" placeholder="Description"></textarea>
+								</div>
 							</div>
 							<button type="button" class="addOption">+</button>
 						</fieldset>
 					</div>
 				</section>
 			</div>
+			<!-- Spellcasting -->
+			<section class="spellcasting group">
+				<h2>Spellcasting</h2>
+				<div id="spellMeta">
+					<input id="spellClass" name="spellClass" type="text" placeholder="Warrior"/>
+					<input id="spellAbility" name="spellAbility" type="text" placeholder="STR"/>
+					<input id="spellSaveDC" name="spellSaveDC" type="number" placeholder="10"/>
+					<input id="spellAtkBonus" name="spellAtkBonus" type="number" placeholder="2"/>
+					<label for="spellClass">Spellcasting Class</label>
+					<label for="spellAbility">Spellcasting Ability</label>
+					<label for="spellSaveDC">Spell Save DC</label>
+					<label for="spellAtkBonus">Spell Attack Bonus</label>
+				</div>
+				<fieldset class="spells">
+					<legend>Cantrips</legend>
+					<div id="cantrips">
+						<div>
+							<input type="text" placeholder="Spell"/>
+							<textarea placeholder="Description"></textarea>
+						</div>
+					</div>
+					<button type="button" class="addOption">+</button>
+				</fieldset>
+				<fieldset class="spells">
+					<legend>Level 1 : <input type="number"/> / <input type="number"/></legend>
+					<div id="firstLvl">
+						<div>
+							<input type="checkbox"/>
+							<input type="text" placeholder="Spell">
+							<textarea placeholder="Description"></textarea>
+						</div>
+					</div>
+					<button type="button" class="addOption">+</button>
+				</fieldset>
+				<fieldset class="spells">
+					<legend>Level 2 : <input type="number"/> / <input type="number"/></legend>
+					<div id="secondLvl">
+						<div>
+							<input type="checkbox"/>
+							<input type="text" placeholder="Spell">
+							<textarea placeholder="Description"></textarea>
+						</div>
+					</div>
+					<button type="button" class="addOption">+</button>
+				</fieldset>
+				<fieldset class="spells">
+					<legend>Level 3 : <input type="number"/> / <input type="number"/></legend>
+					<div id="thirdLvl">
+						<div>
+							<input type="checkbox"/>
+							<input type="text" placeholder="Spell">
+							<textarea placeholder="Description"></textarea>
+						</div>
+					</div>
+					<button type="button" class="addOption">+</button>
+				</fieldset>
+				<fieldset class="spells">
+					<legend>Level 4 : <input type="number"/> / <input type="number"/></legend>
+					<div id="fourthLvl">
+						<div>
+							<input type="checkbox"/>
+							<input type="text" placeholder="Spell">
+							<textarea placeholder="Description"></textarea>
+						</div>
+					</div>
+					<button type="button" class="addOption">+</button>
+				</fieldset>
+				<fieldset class="spells">
+					<legend>Level 5 : <input type="number"/> / <input type="number"/></legend>
+					<div id="fifthLvl">
+						<div>
+							<input type="checkbox"/>
+							<input type="text" placeholder="Spell">
+							<textarea placeholder="Description"></textarea>
+						</div>
+					</div>
+					<button type="button" class="addOption">+</button>
+				</fieldset>
+				<fieldset class="spells">
+					<legend>Level 6 : <input type="number"/> / <input type="number"/></legend>
+					<div id="sixthLvl">
+						<div>
+							<input type="checkbox"/>
+							<input type="text" placeholder="Spell">
+							<textarea placeholder="Description"></textarea>
+						</div>
+					</div>
+					<button type="button" class="addOption">+</button>
+				</fieldset>
+				<fieldset class="spells">
+					<legend>Level 7 : <input type="number"/> / <input type="number"/></legend>
+					<div id="seventLvl">
+						<div>
+							<input type="checkbox"/>
+							<input type="text" placeholder="Spell">
+							<textarea placeholder="Description"></textarea>
+						</div>
+					</div>
+					<button type="button" class="addOption">+</button>
+				</fieldset>
+				<fieldset class="spells">
+					<legend>Level 8 : <input type="number"/> / <input type="number"/></legend>
+					<div id="eighthLvl">
+						<div>
+							<input type="checkbox"/>
+							<input type="text" placeholder="Spell">
+							<textarea placeholder="Description"></textarea>
+						</div>
+					</div>
+					<button type="button" class="addOption">+</button>
+				</fieldset>
+				<fieldset class="spells">
+					<legend>Level 9 : <input type="number"/> / <input type="number"/></legend>
+					<div id="ninthLvl">
+						<div>
+							<input type="checkbox"/>
+							<input type="text" placeholder="Spell">
+							<textarea placeholder="Description"></textarea>
+						</div>
+					</div>
+					<button type="button" class="addOption">+</button>
+				</fieldset>
 
+			</section>
 			<!-- Backstory -->
 			<section class="backstory group">
-
+				<h2>Backstory</h2>
+				<textarea rows="10" placeholder="I was born in..."></textarea>
 			</section>
 			<!-- Notes -->
 			<section class="notes group">
-
+				<h2>Campagin Notes</h2>
+				<div id="campaignNotes">
+					<textarea rows="4" placeholder="Rocks fell..."></textarea>
+				</div>
+				<button type="button" class="addOption">+</button>
 			</section>
 		</main>
 

@@ -209,9 +209,20 @@ header .group {
   grid-template-columns: 1fr 2fr 1fr;
   text-align: left;
 }
-#saves input[type=checkbox],
-#skills input[type=checkbox] {
+#saves input[type=checkbox] {
   height: 1rem;
+}
+#skills div {
+  display: flex;
+  justify-content: space-around;
+  align-items: baseline;
+  padding-right: 0.5rem;
+}
+#skills input[type=radio] {
+  height: 0.8rem;
+}
+#skills input:checked {
+  border: 2px solid red;
 }
 #saves input[type=number],
 #skills input[type=number] {
@@ -489,6 +500,7 @@ header .group {
   font-size: 1.25rem;
   border-radius: 1rem;
   text-align: center;
+  width: 100%;
 }
 #spellMeta label {
   font-size: 0.8rem;

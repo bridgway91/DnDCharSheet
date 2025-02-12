@@ -16,11 +16,11 @@
 			<h1>Dungeons & Dragons Character Sheet</h1>
 			<section class="group">
 				<div>
-					<button type="button" id="edit">SAVE</button> <!--switches between edit/save -->
+					<button class="changing" type="button" id="edit">SAVE</button> <!--switches between edit/save -->
 				</div>
 				<div>
-					<button type="button" id="importChar">IMPORT</button>
-					<button type="button" id="exportChar">EXPORT</button>
+					<button class="changing" type="button" id="importChar">IMPORT</button>
+					<button class="changing" type="button" id="exportChar">EXPORT</button>
 				</div>
 			</section>
 		</header>
@@ -105,7 +105,7 @@
 				<section class="skillsProficiencies group">
 					<fieldset id="topleft">
 						<label for="inspiration">Inspiration</label>
-						<input id="inspiration" name="inspiration" type="checkbox"/>
+						<input class="changing" id="inspiration" name="inspiration" type="checkbox"/>
 						<label for="proficiencyBonus">Proficiency Bonus</label>
 						<input id="proficiencyBonus" name="proficiencyBonus" type="number" placeholder="2"/>
 					</fieldset>
@@ -132,58 +132,130 @@
 					</fieldset>
 					<fieldset id="skills">
 						<legend>Skills</legend>
-						<input type="checkbox"/>
+						<div>
+							<input type="radio" name="Ra_Acrobatics" value="normal" checked/>
+							<input type="radio" name="Ra_Acrobatics" value="proficient"/>
+							<input type="radio" name="Ra_Acrobatics" value="expertise"/>
+						</div>
 						<label for="acrobatics">Acrobatics<span class="stat">(Dex)</span></label>
 						<input id="acrobatics" name="acrobatics" type="number" placeholder="0"/>
-						<input type="checkbox"/>
+						<div>
+							<input type="radio" name="Ra_AnimalHandling" value="normal" checked/>
+							<input type="radio" name="Ra_AnimalHandling" value="proficient"/>
+							<input type="radio" name="Ra_AnimalHandling" value="expertise"/>
+						</div>
 						<label for="animalHandling">Animal Handling<span class="stat">(Wis)</span></label>
 						<input id="animalHandling" name="animalHandling" type="number" placeholder="0"/>
-						<input type="checkbox"/>
+						<div>
+							<input type="radio" name="Ra_Arcana" value="normal" checked/>
+							<input type="radio" name="Ra_Arcana" value="proficient"/>
+							<input type="radio" name="Ra_Arcana" value="expertise"/>
+						</div>
 						<label for="arcana">Arcana<span class="stat">(Int)</span></label>
 						<input id="arcana" name="arcana" type="number" placeholder="0"/>
-						<input type="checkbox" checked/>
+						<div>
+							<input type="radio" name="Ra_Athletics" value="normal"/>
+							<input type="radio" name="Ra_Athletics" value="proficient" checked/>
+							<input type="radio" name="Ra_Athletics" value="expertise"/>
+						</div>
 						<label for="athletics">Athletics<span class="stat">(Str)</span></label>
 						<input id="athletics" name="athletics" type="number" placeholder="2"/>
-						<input type="checkbox"/>
+						<div>
+							<input type="radio" name="Ra_Deception" value="normal" checked/>
+							<input type="radio" name="Ra_Deception" value="proficient"/>
+							<input type="radio" name="Ra_Deception" value="expertise"/>
+						</div>
 						<label for="deception">Deception<span class="stat">(Cha)</span></label>
 						<input id="deception" name="deception" type="number" placeholder="0"/>
-						<input type="checkbox"/>
+						<div>
+							<input type="radio" name="Ra_History" value="normal" checked/>
+							<input type="radio" name="Ra_History" value="proficient"/>
+							<input type="radio" name="Ra_History" value="expertise"/>
+						</div>
 						<label for="history">History<span class="stat">(Int)</span></label>
 						<input id="history" name="history" type="number" placeholder="0"/>
-						<input type="checkbox"/>
+						<div>
+							<input type="radio" name="Ra_Insight" value="normal" checked/>
+							<input type="radio" name="Ra_Insight" value="proficient"/>
+							<input type="radio" name="Ra_Insight" value="expertise"/>
+						</div>
 						<label for="insight">Insight<span class="stat">(Wis)</span></label>
 						<input id="insight" name="insight" type="number" placeholder="0"/>
-						<input type="checkbox"/>
+						<div>
+							<input type="radio" name="Ra_Intimidation" value="normal" checked/>
+							<input type="radio" name="Ra_Intimidation" value="proficient"/>
+							<input type="radio" name="Ra_Intimidation" value="expertise"/>
+						</div>
 						<label for="intimidation">Intimidation<span class="stat">(Cha)</span></label>
 						<input id="intimidation" name="intimidation" type="number" placeholder="0"/>
-						<input type="checkbox"/>
+						<div>
+							<input type="radio" name="Ra_Investigation" value="normal" checked/>
+							<input type="radio" name="Ra_Investigation" value="proficient"/>
+							<input type="radio" name="Ra_Investigation" value="expertise"/>
+						</div>
 						<label for="investigation">Investigation<span class="stat">(Int)</span></label>
 						<input id="investigation" name="investigation" type="number" placeholder="0"/>
-						<input type="checkbox"/>
+						<div>
+							<input type="radio" name="Ra_Medicine" value="normal" checked/>
+							<input type="radio" name="Ra_Medicine" value="proficient"/>
+							<input type="radio" name="Ra_Medicine" value="expertise"/>
+						</div>
 						<label for="medicine">Medicine<span class="stat">(Wis)</span></label>
 						<input id="medicine" name="medicine" type="number" placeholder="0"/>
-						<input type="checkbox"/>
+						<div>
+							<input type="radio" name="Ra_Nature" value="normal" checked/>
+							<input type="radio" name="Ra_Nature" value="proficient"/>
+							<input type="radio" name="Ra_Nature" value="expertise"/>
+						</div>
 						<label for="nature">Nature<span class="stat">(Int)</span></label>
 						<input id="nature" name="nature" type="number" placeholder="0"/>
-						<input type="checkbox"/>
+						<div>
+							<input type="radio" name="Ra_Perception" value="normal" checked/>
+							<input type="radio" name="Ra_Perception" value="proficient"/>
+							<input type="radio" name="Ra_Perception" value="expertise"/>
+						</div>
 						<label for="perception">Perception<span class="stat">(Wis)</span></label>
 						<input id="perception" name="perception" type="number" placeholder="0"/>
-						<input type="checkbox"/>
+						<div>
+							<input type="radio" name="Ra_Performance" value="normal" checked/>
+							<input type="radio" name="Ra_Performance" value="proficient"/>
+							<input type="radio" name="Ra_Performance" value="expertise"/>
+						</div>
 						<label for="performance">Performance<span class="stat">(Cha)</span></label>
 						<input id="performance" name="performance" type="number" placeholder="0"/>
-						<input type="checkbox" checked/>
+						<div>
+							<input type="radio" name="Ra_Persuasion" value="normal"/>
+							<input type="radio" name="Ra_Persuasion" value="proficient" checked/>
+							<input type="radio" name="Ra_Persuasion" value="expertise"/>
+						</div>
 						<label for="persuasion">Persuasion<span class="stat">(Cha)</span></label>
 						<input id="persuasion" name="persuasion" type="number" placeholder="2"/>
-						<input type="checkbox"/>
+						<div>
+							<input type="radio" name="Ra_Religion" value="normal" checked/>
+							<input type="radio" name="Ra_Religion" value="proficient"/>
+							<input type="radio" name="Ra_Religion" value="expertise"/>
+						</div>
 						<label for="religion">Religion<span class="stat">(Int)</span></label>
 						<input id="religion" name="religion" type="number" placeholder="0"/>
-						<input type="checkbox"/>
+						<div>
+							<input type="radio" name="Ra_SleightOfHand" value="normal" checked/>
+							<input type="radio" name="Ra_SleightOfHand" value="proficient"/>
+							<input type="radio" name="Ra_SleightOfHand" value="expertise"/>
+						</div>
 						<label for="sleightOfHand">Sleight of Hand<span class="stat">(Dex)</span></label>
 						<input id="sleightOfHand" name="sleightOfHand" type="number" placeholder="0"/>
-						<input type="checkbox"/>
+						<div>
+							<input type="radio" name="Ra_Stealth" value="normal" checked/>
+							<input type="radio" name="Ra_Stealth" value="proficient"/>
+							<input type="radio" name="Ra_Stealth" value="expertise"/>
+						</div>
 						<label for="stealth">Stealth<span class="stat">(Dex)</span></label>
 						<input id="stealth" name="stealth" type="number" placeholder="0"/>
-						<input type="checkbox" checked/>
+						<div>
+							<input type="radio" name="Ra_Survival" value="normal"/>
+							<input type="radio" name="Ra_Survival" value="proficient" checked/>
+							<input type="radio" name="Ra_Survival" value="expertise"/>
+						</div>
 						<label for="survival">Survival<span class="stat">(Wis)</span></label>
 						<input id="survival" name="survival" type="number" placeholder="2"/>
 					</fieldset>
@@ -221,9 +293,9 @@
 							<label for="hpMax">Maximum</label>
 							<input id="hpMax" name="hpMax" type="number" placeholder="10"/>
 							<label for="hpCurrent">Current</label>
-							<input id="hpCurrent" name="hpCurrent" type="number" placeholder="8"/>
+							<input class="changing" id="hpCurrent" name="hpCurrent" type="number" placeholder="8"/>
 							<label for="hpTemp">Temporary</label>
-							<input id="hpTemp" name="hpTemp" type="number" placeholder="0"/>
+							<input class="changing" id="hpTemp" name="hpTemp" type="number" placeholder="0"/>
 						</fieldset>
 						<fieldset id="hitDice">
 							<legend>Hit Dice</legend>
@@ -233,7 +305,7 @@
 							</div>
 							<div id="hitDiceWrapper">
 								<div>
-									<input type="number" placeholder="1"/>
+									<input class="changing" type="number" placeholder="1"/>
 									<input type="text" placeholder="1d10"/>
 								</div>
 							</div>
@@ -244,17 +316,17 @@
 							<div>
 								<span>Success</span>
 								<div>
-									<input type="checkbox"/>
-									<input type="checkbox"/>
-									<input type="checkbox"/>
+									<input class="changing" type="checkbox"/>
+									<input class="changing" type="checkbox"/>
+									<input class="changing" type="checkbox"/>
 								</div>
 							</div>
 							<div>
 								<span>Fail</span>
 								<div>
-									<input type="checkbox"/>
-									<input type="checkbox"/>
-									<input type="checkbox"/>
+									<input class="changing" type="checkbox"/>
+									<input class="changing" type="checkbox"/>
+									<input class="changing" type="checkbox"/>
 								</div>
 							</div>
 						</fieldset>
@@ -297,11 +369,11 @@
 									</thead>
 									<tbody>
 										<tr>
-											<td><input type="number" placeholder="0"/></td>
-											<td><input type="number" placeholder="10"/></td>
-											<td><input type="number" placeholder="0"/></td>
-											<td><input type="number" placeholder="0"/></td>
-											<td><input type="number" placeholder="0"/></td>
+											<td><input class="changing" type="number" placeholder="0"/></td>
+											<td><input class="changing" type="number" placeholder="10"/></td>
+											<td><input class="changing" type="number" placeholder="0"/></td>
+											<td><input class="changing" type="number" placeholder="0"/></td>
+											<td><input class="changing" type="number" placeholder="0"/></td>
 										</tr>
 									</tbody>
 								</table>
@@ -330,13 +402,13 @@
 							<div id="trackers">
 								<div>
 									<input type="text" placeholder="Daily Use"/>
-									<input type="number" placeholder="1"/>
+									<input class="changing" type="number" placeholder="1"/>
 									<span>/</span>
 									<input type="number" placeholder="1"/>
 								</div>
 								<div>
 									<input type="text" placeholder="Daily Use"/>
-									<input type="number" placeholder="1"/>
+									<input class="changing" type="number" placeholder="1"/>
 									<span>/</span>
 									<input type="number" placeholder="1"/>
 								</div>
@@ -383,10 +455,10 @@
 					<button type="button" class="addOption">+</button>
 				</fieldset>
 				<fieldset class="spells">
-					<legend>Level 1 : <input type="number"/> / <input type="number"/></legend>
+					<legend>Level 1 : <input class="changing" type="number"/> / <input type="number"/></legend>
 					<div id="firstLvl">
 						<div>
-							<input type="checkbox"/>
+							<input class="changing" type="checkbox"/>
 							<input type="text" placeholder="Spell">
 							<textarea placeholder="Description"></textarea>
 						</div>
@@ -394,10 +466,10 @@
 					<button type="button" class="addOption">+</button>
 				</fieldset>
 				<fieldset class="spells">
-					<legend>Level 2 : <input type="number"/> / <input type="number"/></legend>
+					<legend>Level 2 : <input class="changing" type="number"/> / <input type="number"/></legend>
 					<div id="secondLvl">
 						<div>
-							<input type="checkbox"/>
+							<input class="changing" type="checkbox"/>
 							<input type="text" placeholder="Spell">
 							<textarea placeholder="Description"></textarea>
 						</div>
@@ -405,10 +477,10 @@
 					<button type="button" class="addOption">+</button>
 				</fieldset>
 				<fieldset class="spells">
-					<legend>Level 3 : <input type="number"/> / <input type="number"/></legend>
+					<legend>Level 3 : <input class="changing" type="number"/> / <input type="number"/></legend>
 					<div id="thirdLvl">
 						<div>
-							<input type="checkbox"/>
+							<input class="changing" type="checkbox"/>
 							<input type="text" placeholder="Spell">
 							<textarea placeholder="Description"></textarea>
 						</div>
@@ -416,10 +488,10 @@
 					<button type="button" class="addOption">+</button>
 				</fieldset>
 				<fieldset class="spells">
-					<legend>Level 4 : <input type="number"/> / <input type="number"/></legend>
+					<legend>Level 4 : <input class="changing" type="number"/> / <input type="number"/></legend>
 					<div id="fourthLvl">
 						<div>
-							<input type="checkbox"/>
+							<input class="changing" type="checkbox"/>
 							<input type="text" placeholder="Spell">
 							<textarea placeholder="Description"></textarea>
 						</div>
@@ -427,10 +499,10 @@
 					<button type="button" class="addOption">+</button>
 				</fieldset>
 				<fieldset class="spells">
-					<legend>Level 5 : <input type="number"/> / <input type="number"/></legend>
+					<legend>Level 5 : <input class="changing" type="number"/> / <input type="number"/></legend>
 					<div id="fifthLvl">
 						<div>
-							<input type="checkbox"/>
+							<input class="changing" type="checkbox"/>
 							<input type="text" placeholder="Spell">
 							<textarea placeholder="Description"></textarea>
 						</div>
@@ -438,10 +510,10 @@
 					<button type="button" class="addOption">+</button>
 				</fieldset>
 				<fieldset class="spells">
-					<legend>Level 6 : <input type="number"/> / <input type="number"/></legend>
+					<legend>Level 6 : <input class="changing" type="number"/> / <input type="number"/></legend>
 					<div id="sixthLvl">
 						<div>
-							<input type="checkbox"/>
+							<input class="changing" type="checkbox"/>
 							<input type="text" placeholder="Spell">
 							<textarea placeholder="Description"></textarea>
 						</div>
@@ -449,10 +521,10 @@
 					<button type="button" class="addOption">+</button>
 				</fieldset>
 				<fieldset class="spells">
-					<legend>Level 7 : <input type="number"/> / <input type="number"/></legend>
+					<legend>Level 7 : <input class="changing" type="number"/> / <input type="number"/></legend>
 					<div id="seventLvl">
 						<div>
-							<input type="checkbox"/>
+							<input class="changing" type="checkbox"/>
 							<input type="text" placeholder="Spell">
 							<textarea placeholder="Description"></textarea>
 						</div>
@@ -460,10 +532,10 @@
 					<button type="button" class="addOption">+</button>
 				</fieldset>
 				<fieldset class="spells">
-					<legend>Level 8 : <input type="number"/> / <input type="number"/></legend>
+					<legend>Level 8 : <input class="changing" type="number"/> / <input type="number"/></legend>
 					<div id="eighthLvl">
 						<div>
-							<input type="checkbox"/>
+							<input class="changing" type="checkbox"/>
 							<input type="text" placeholder="Spell">
 							<textarea placeholder="Description"></textarea>
 						</div>
@@ -471,10 +543,10 @@
 					<button type="button" class="addOption">+</button>
 				</fieldset>
 				<fieldset class="spells">
-					<legend>Level 9 : <input type="number"/> / <input type="number"/></legend>
+					<legend>Level 9 : <input class="changing" type="number"/> / <input type="number"/></legend>
 					<div id="ninthLvl">
 						<div>
-							<input type="checkbox"/>
+							<input class="changing" type="checkbox"/>
 							<input type="text" placeholder="Spell">
 							<textarea placeholder="Description"></textarea>
 						</div>
@@ -494,7 +566,7 @@
 				<div id="campaignNotes">
 					<textarea rows="4" placeholder="Rocks fell..."></textarea>
 				</div>
-				<button type="button" class="addOption">+</button>
+				<button class="changing" type="button" class="addOption">+</button>
 			</section>
 		</main>
 

@@ -1,14 +1,12 @@
 class Character {
     constructor() {
         this.name = ''
-        this.characteristics = [] // age, height, weight, eyes, skin, hair
-        this.class = [] // ex: [[Monk,6],[Ranger,3],[Rogue,3]]
-        this.background = ''
-        this.race = ''
-        this.alignment = ''
-        this.stats = [] // ex: [10,10,10...] order = str,dex,con,int,wis,cha
+        this.characteristics = [] // length=9 : race, background, alignment, age, height, weight, eyes, skin, hair
+        this.class = [[]] // length=X -- array of arrays, each one separate [class,level]
+        this.stats = [] // length=6 : str, dex, con, int, wis, cha
+        this.inspiration = false
         this.proficiency = 2
-        this.saves = [] // line up boolean w/ stats, 0 for not prof, 1 for prof
+        this.saves = [] // length=6 -- just booleans of if prof or not
         this.skills = [] // array of skills, NOT BOOLEAN, instead 0/1/2 for * prof bonus (to account for expertise)
         this.weapons = '' // strings of weapon names, tho mainly simple / martial
         this.armor = ''
@@ -17,22 +15,25 @@ class Character {
         this.armor = 10
         this.initiative = 0
         this.speed = 30
-        this.health = 10
-        this.temp_health = 0
-        this.hit_die = [[1,10]] // [# dice, die size], double array to account for if have multiple hit die sizes
-        this.death_saves = [0,0]
-        this.attacks = [['Unarmed',2,'1d4 bludgeoning']] // name,bonus,dmg
-        this.equipment = [] // each item is an array [amount, name/description]
-        this.money = [0,0,0,0,0] // copper, silver, etherium, gold, platinum
-        this.features = [] // each feature is array [title, description]
+        this.maxHealth = 10
+        this.currentHealth = 10
+        this.tempHealth = 0
+        this.hit_die = [[1,'1d10']] // [# dice, die size], double array to account for if have multiple hit die sizes
+        this.death_saves = [[0,0,0],[0,0,0]]
+        this.attacks = [['Unarmed Strike',2,'1d4+2 B']] // name,bonus,dmg
+        this.money = [0,0,0,0,0] // platinum, gold, etherium, silver, copper
+        this.equipment = [[]] // each item is an array [amount, name/description]
+        this.trackers = [[],[]] // each [] is ['name',#-current,#-max]
+        this.features = [[]] // each feature is array [title, source, description]
+        this.spellcasting = [] // class, ability, save DC, attack bonus
+        this.spells = {Cantrips:[],Level_1:[],Level_2:[],Level_3:[],Level_4:[],Level_5:[],Level_6:[],Level_7:[],Level_8:[],Level_9:[]} // each spell is [name, description]
         this.backstory = ''
         this.notes = []
-        this.spellcasting = [] // ability, save DC, attack bonus
-        this.spells = [] // each spell is [name, description]
     }
 }
 
 let myChar = new Character()
+console.log(myChar)
 
 /////////////////////////////////////////////////
 
@@ -58,21 +59,55 @@ editInfo.addEventListener('click',editOrSave)
 
 /////////////////////////////////////////////////
 
-function editOrSave() {
-    // if wanting to edit, run editCharInfo(), or if saving, run saveCharInfo()
-    editInfo.innerHTML = editInfo.innerHTML == 'SAVE' ? 'EDIT' : 'SAVE'
-    console.log(myChar)
-    myChar.name = charName.value
-    //myChar.class...
-    myChar.characteristics = [charAge.value,charHeight.value,charWeight.value,charEyes.value,charSkin.value,charHair.value]
-    myChar.race = charRace.value
-    myChar.background = charBackground.value
-    myChar.alignment = charAlignment.value
-    console.log(myChar)
-    const allInput = document.querySelectorAll('input')
-    // console.log(allInput)
-    localStorage.setItem('character',JSON.stringify(myChar))
-    for (let i of allInput) {
-        i.disabled = true
+function editOrSave() { // if wanting to edit, run editCharInfo(), or if saving, run saveCharInfo()
+    if(editInfo.innerHTML == 'SAVE') {
+        saveCharInfo()
+        editInfo.innerHTML = 'EDIT'
+    } else {
+        editCharInfo()
+        editInfo.innerHTML = 'SAVE'
     }
+    console.log(myChar)
+}
+
+function editCharInfo() { // enables editing all inputs
+    const allInput = document.querySelectorAll('input')
+    const allButton = document.querySelectorAll('button')
+    for (let i of allInput) {
+        i.disabled = false
+    }
+    for (let i of allButton) {
+        i.disabled = false
+    }
+}
+
+function saveCharInfo() { // 2 parts : closes off all info that doesn't change often from being edited, and saves all input info to myChar object (+ sets to localStorage)
+    // myChar.name = charName.value
+    // //myChar.class...
+    // myChar.characteristics = [charAge.value,charHeight.value,charWeight.value,charEyes.value,charSkin.value,charHair.value]
+    // myChar.race = charRace.value
+    // myChar.background = charBackground.value
+    // myChar.alignment = charAlignment.value
+    // console.log(myChar)
+    // localStorage.setItem('character',JSON.stringify(myChar))
+    const allInput = document.querySelectorAll('input')
+    const allButton = document.querySelectorAll('button')
+    for (let i of allInput) {
+        if(!i.classList.contains('changing')) {i.disabled = true}
+    }
+    for (let i of allButton) {
+        if(!i.classList.contains('changing')) {i.disabled = true}
+    }
+}
+
+function stopEdit() {
+
+}
+
+function grabLocal() { // if a character exists in localstorage, grabs it and assigns all relevant values to sheet
+
+}
+
+function updateDerivedValues() { // default just the general stat modifiers (str, con, etc) to avoid interfering with temp / specific bonuses to saves or skills or w/e else
+
 }

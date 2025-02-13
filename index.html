@@ -40,7 +40,7 @@
 						<input type="text" placeholder="Warrior"/>
 						<label>Level</label>
 						<input type="number" placeholder="1"/>
-						<button type="button" class="removeOption">-</button>
+						<!-- <button type="button" class="removeOption">-</button> -->
 					</div>
 				</fieldset>
 			</div>
@@ -68,7 +68,7 @@
 		<!-- Stats, Skills, everything else... -->
 		<main>
 			<!-- Main Stats -->
-			<section class="mainStats group">
+			<section id="stats" class="mainStats group">
 				<fieldset>
 					<legend>Strength</legend>
 					<input id="strength" name="strength" type="number" placeholder="10"/>
@@ -315,7 +315,7 @@
 							<legend>Death Saves</legend>
 							<div>
 								<span>Success</span>
-								<div>
+								<div id="dsPass">
 									<input class="changing" type="checkbox"/>
 									<input class="changing" type="checkbox"/>
 									<input class="changing" type="checkbox"/>
@@ -323,7 +323,7 @@
 							</div>
 							<div>
 								<span>Fail</span>
-								<div>
+								<div id="dsFail">
 									<input class="changing" type="checkbox"/>
 									<input class="changing" type="checkbox"/>
 									<input class="changing" type="checkbox"/>
@@ -355,7 +355,7 @@
 					</div>
 					<div id="equipment">
 						<fieldset>
-							<legend>Equipment</legend>
+							<legend>Items</legend>
 							<div id="money">
 								<table>
 									<thead>

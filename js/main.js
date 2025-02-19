@@ -26,13 +26,16 @@ class Character {
         this.trackers = [[],[]] // each [] is ['name',#-current,#-max]
         this.features = [[]] // each feature is array [title, source, description]
         this.spellcasting = [] // class, ability, save DC, attack bonus
-        this.spells = {Cantrips:[],Level_1:[],Level_2:[],Level_3:[],Level_4:[],Level_5:[],Level_6:[],Level_7:[],Level_8:[],Level_9:[]} // each spell is [name, description]
+        this.spellslots = {Level_1:[],Level_2:[],Level_3:[],Level_4:[],Level_5:[],Level_6:[],Level_7:[],Level_8:[],Level_9:[]} // [spell slots available, spell slots max]
+        this.spells = {Cantrips:[],Level_1:[],Level_2:[],Level_3:[],Level_4:[],Level_5:[],Level_6:[],Level_7:[],Level_8:[],Level_9:[]} // each spell is [prepared-check, name, description]
         this.backstory = ''
         this.notes = []
     }
 }
 
-let myChar = new Character()
+let myChar = localStorage.getItem('character')
+    ? JSON.parse(localStorage.getItem('character'))
+    : new Character()
 console.log(myChar)
 
 /////////////////////////////////////////////////
@@ -73,6 +76,22 @@ const charItems = document.querySelector('#itemsWrapper')
 
 const charTrackers = document.querySelector('#trackers')
 const charFeatures = document.querySelector('#features')
+
+const charSpellcasting = document.querySelector('#spellMeta')
+const charSpell0 = document.querySelector('#cantrips')
+const charSpell1 = document.querySelector('#firstLvl')
+const charSpell2 = document.querySelector('#secondLvl')
+const charSpell3 = document.querySelector('#thirdLvl')
+const charSpell4 = document.querySelector('#fourthLvl')
+const charSpell5 = document.querySelector('#fifthLvl')
+const charSpell6 = document.querySelector('#sixthLvl')
+const charSpell7 = document.querySelector('#seventhLvl')
+const charSpell8 = document.querySelector('#eighthLvl')
+const charSpell9 = document.querySelector('#ninthLvl')
+
+const charBackstory = document.querySelector('#backstory')
+
+const charNotes = document.querySelector('#campaignNotes')
 
 /////////////////////////////////////////////////
 
@@ -116,11 +135,13 @@ function saveCharInfo() { // 2 parts : closes off all info that doesn't change o
     updateDerivedValues()
 }
 
-function grabLocal() { // if a character exists in localstorage, grabs it and assigns all relevant values to sheet
-
+function grabLocal() { // grabs character from localStorage and assigns all relevant values to sheet
+    if (!localStorage.getItem('character')) return
+    // name
+    charName.value = myChar.name
 }
 
-function updateDerivedValues() { // default just the general stat modifiers (str, con, etc) to avoid interfering with temp / specific bonuses to saves or skills or w/e else
+function updateDerivedValues() { // default just the general stat modifiers (str, con, etc) to avoid interfering with temp / specific bonuses to saves or skills or w/e else, separate fn b/c might expand later
 
 }
 
@@ -145,7 +166,7 @@ function updateCharacter() { // updates myChar with entered info
     myChar.saves = savesCheckboxArray.map((e,i)=>[e.checked,savesNumberArray[i].value])
     // skills
     let skillsDivArray = [...charSkills.querySelectorAll('div')]
-    let skillsNumberArray = [...charSkills.querySelectorAll('input[type=number')]
+    let skillsNumberArray = [...charSkills.querySelectorAll('input[type=number]')]
     skillsDivArray = skillsDivArray.map(e=>[...e.querySelectorAll('input')].map(f=>f.checked).indexOf(true))
     myChar.skills = skillsDivArray.map((e,i)=>[e,skillsNumberArray[i].value])
     // weapons
@@ -186,7 +207,70 @@ function updateCharacter() { // updates myChar with entered info
     // features
     let featureArray = [...charFeatures.querySelectorAll('div')]
     myChar.features = featureArray.map(e=>[...e.querySelectorAll('*')].map(f=>f.value))
+    // spellcasting
+    myChar.spellcasting = [
+        charSpellcasting.querySelector('#spellClass').value,
+        charSpellcasting.querySelector('#spellAbility').value,
+        charSpellcasting.querySelector('#spellSaveDC').value,
+        charSpellcasting.querySelector('#spellAtkBonus').value]
+    // spells-0
+    let cantripsArray = [...charSpell0.querySelectorAll('div')]
+    myChar.spells['Cantrips'] = cantripsArray.map(e=>[e.querySelector('input').value,e.querySelector('textarea').value])
+    // spells-1
+    let spell1Slots = [...charSpell1.previousElementSibling.querySelectorAll('input')]
+    let spell1Array = [...charSpell1.querySelectorAll('div')]
+    myChar.spellslots['Level_1'] = spell1Slots.map(e=>e.value)
+    myChar.spells['Level_1'] = spell1Array.map(e=>[e.querySelector('input[type=checkbox]').checked,e.querySelector('input[type=text]').value,e.querySelector('textarea').value])
+    // spells-2
+    let spell2Slots = [...charSpell2.previousElementSibling.querySelectorAll('input')]
+    let spell2Array = [...charSpell2.querySelectorAll('div')]
+    myChar.spellslots['Level_2'] = spell2Slots.map(e=>e.value)
+    myChar.spells['Level_2'] = spell2Array.map(e=>[e.querySelector('input[type=checkbox]').checked,e.querySelector('input[type=text]').value,e.querySelector('textarea').value])
+    // spells-3
+    let spell3Slots = [...charSpell3.previousElementSibling.querySelectorAll('input')]
+    let spell3Array = [...charSpell3.querySelectorAll('div')]
+    myChar.spellslots['Level_3'] = spell3Slots.map(e=>e.value)
+    myChar.spells['Level_3'] = spell3Array.map(e=>[e.querySelector('input[type=checkbox]').checked,e.querySelector('input[type=text]').value,e.querySelector('textarea').value])
+    // spells-4
+    let spell4Slots = [...charSpell4.previousElementSibling.querySelectorAll('input')]
+    let spell4Array = [...charSpell4.querySelectorAll('div')]
+    myChar.spellslots['Level_4'] = spell4Slots.map(e=>e.value)
+    myChar.spells['Level_4'] = spell4Array.map(e=>[e.querySelector('input[type=checkbox]').checked,e.querySelector('input[type=text]').value,e.querySelector('textarea').value])
+    // spells-5
+    let spell5Slots = [...charSpell5.previousElementSibling.querySelectorAll('input')]
+    let spell5Array = [...charSpell5.querySelectorAll('div')]
+    myChar.spellslots['Level_5'] = spell5Slots.map(e=>e.value)
+    myChar.spells['Level_5'] = spell5Array.map(e=>[e.querySelector('input[type=checkbox]').checked,e.querySelector('input[type=text]').value,e.querySelector('textarea').value])
+    // spells-6
+    let spell6Slots = [...charSpell6.previousElementSibling.querySelectorAll('input')]
+    let spell6Array = [...charSpell6.querySelectorAll('div')]
+    myChar.spellslots['Level_6'] = spell6Slots.map(e=>e.value)
+    myChar.spells['Level_6'] = spell6Array.map(e=>[e.querySelector('input[type=checkbox]').checked,e.querySelector('input[type=text]').value,e.querySelector('textarea').value])
+    // spells-7
+    let spell7Slots = [...charSpell7.previousElementSibling.querySelectorAll('input')]
+    let spell7Array = [...charSpell7.querySelectorAll('div')]
+    myChar.spellslots['Level_7'] = spell7Slots.map(e=>e.value)
+    myChar.spells['Level_7'] = spell7Array.map(e=>[e.querySelector('input[type=checkbox]').checked,e.querySelector('input[type=text]').value,e.querySelector('textarea').value])
+    // spells-8
+    let spell8Slots = [...charSpell8.previousElementSibling.querySelectorAll('input')]
+    let spell8Array = [...charSpell8.querySelectorAll('div')]
+    myChar.spellslots['Level_8'] = spell8Slots.map(e=>e.value)
+    myChar.spells['Level_8'] = spell8Array.map(e=>[e.querySelector('input[type=checkbox]').checked,e.querySelector('input[type=text]').value,e.querySelector('textarea').value])
+    // spells-9
+    let spell9Slots = [...charSpell9.previousElementSibling.querySelectorAll('input')]
+    let spell9Array = [...charSpell9.querySelectorAll('div')]
+    myChar.spellslots['Level_9'] = spell9Slots.map(e=>e.value)
+    myChar.spells['Level_9'] = spell9Array.map(e=>[e.querySelector('input[type=checkbox]').checked,e.querySelector('input[type=text]').value,e.querySelector('textarea').value])
+    // backstory
+    myChar.backstory = charBackstory.querySelector('textarea').value
+    // campaign notes
+    let notesArray = [...charNotes.querySelectorAll('textarea')]
+    myChar.notes = notesArray.map(e=>e.value)
 
     console.log(myChar)
     localStorage.setItem('character',JSON.stringify(myChar))
 }
+
+
+
+grabLocal()

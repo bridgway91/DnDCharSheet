@@ -23,8 +23,8 @@ class Character {
         this.attacks = [['Unarmed Strike',2,'1d4+2 B']] // name,bonus,dmg
         this.money = [0,0,0,0,0] // platinum, gold, etherium, silver, copper
         this.items = [] // each item is an array [amount, name/description]
-        this.trackers = [[],[]] // each [] is ['name',#-current,#-max]
-        this.features = [[]] // each feature is array [title, source, description]
+        this.trackers = [] // each [] is ['name',#-current,#-max]
+        this.features = [] // each feature is array [title, source, description]
         this.spellcasting = [] // class, ability, save DC, attack bonus
         this.spellslots = {Level_1:[],Level_2:[],Level_3:[],Level_4:[],Level_5:[],Level_6:[],Level_7:[],Level_8:[],Level_9:[]} // [spell slots available, spell slots max]
         this.spells = {Cantrips:[],Level_1:[],Level_2:[],Level_3:[],Level_4:[],Level_5:[],Level_6:[],Level_7:[],Level_8:[],Level_9:[]} // each spell is [prepared-check, name, description]
@@ -96,6 +96,20 @@ const charNotes = document.querySelector('#campaignNotes')
 /////////////////////////////////////////////////
 
 editInfo.addEventListener('click',editOrSave)
+imChar.addEventListener('click',importData)
+exChar.addEventListener('click',exportData)
+
+document.querySelector('#addClass').addEventListener('click',addOption)
+document.querySelector('#addHitDie').addEventListener('click',addOption)
+document.querySelector('#addAttack').addEventListener('click',addOption)
+document.querySelector('#addItem').addEventListener('click',addOption)
+document.querySelector('#addTracker').addEventListener('click',addOption)
+document.querySelector('#addFeature').addEventListener('click',addOption)
+document.querySelector('#addNote').addEventListener('click',addOption)
+document.querySelector('#addCantrip').addEventListener('click',addOption)
+
+let levelledSpells = [...document.querySelectorAll('button')].filter(e=>e.classList.contains('addSpell'))
+levelledSpells.forEach(e=>e.addEventListener('click',addSpell))
 
 /////////////////////////////////////////////////
 
@@ -113,23 +127,19 @@ function editOrSave() { // if wanting to edit, run editCharInfo(), or if saving,
 function editCharInfo() { // enables editing all inputs
     const allInput = document.querySelectorAll('input')
     const allButton = document.querySelectorAll('button')
-    for (let i of allInput) {
-        i.disabled = false
-    }
-    for (let i of allButton) {
-        i.disabled = false
-    }
+    const allTextarea = document.querySelectorAll('textarea')
+    for (let i of allInput) {i.disabled = false}
+    for (let i of allButton) {i.disabled = false}
+    for (let i of allTextarea) {i.disabled = false}
 }
 
 function saveCharInfo() { // 2 parts : closes off all info that doesn't change often from being edited, and saves all input info to myChar object (+ sets to localStorage)
     const allInput = document.querySelectorAll('input')
     const allButton = document.querySelectorAll('button')
-    for (let i of allInput) {
-        if(!i.classList.contains('changing')) {i.disabled = true}
-    }
-    for (let i of allButton) {
-        if(!i.classList.contains('changing')) {i.disabled = true}
-    }
+    const allTextarea = document.querySelectorAll('textarea')
+    for (let i of allInput) {if(!i.classList.contains('changing')) {i.disabled = true}}
+    for (let i of allButton) {if(!i.classList.contains('changing')) {i.disabled = true}}
+    for (let i of allTextarea) {if(!i.classList.contains('changing')) {i.disabled = true}}
 
     updateCharacter()
     updateDerivedValues()
@@ -143,6 +153,7 @@ function grabLocal() { // grabs character from localStorage and assigns all rele
     if(myChar.class.length) {
         charClasses.innerHTML = ''
         for(let c of myChar.class) {
+            if(c[0].length==0) continue
             charClasses.innerHTML += `
             		<div>
 						<label>Class</label>
@@ -211,11 +222,12 @@ function grabLocal() { // grabs character from localStorage and assigns all rele
     if(myChar.hitDie.length > 0) {
         charHitDice.innerHTML = ''
         myChar.hitDie.forEach(e=>{
+            if(e[0].length!=0) {
             charHitDice.innerHTML += `
                 <div>
 					<input class="changing" type="number" placeholder="1" value="${e[0]}"/>
 					<input type="text" placeholder="1d10" value="${e[1]}"/>
-				</div>`
+				</div>`}
         })
     }
     // death saves
@@ -228,12 +240,13 @@ function grabLocal() { // grabs character from localStorage and assigns all rele
     if(myChar.attacks.length > 0) {
         atksBody.innerHTML = ''
         myChar.attacks.forEach(e=>{
+            if(e[0].length!=0) {
             atksBody.innerHTML += `
                 <tr>
 				    <td><input type="text" placeholder="Unarmed Strike" value="${e[0]}"/></td>
 					<td><input type="number" placeholder="2" value="${e[1]}"/></td>
 					<td><input type="text" placeholder="1d4+2 B" value="${e[2]}"/></td>
-				</tr>`
+				</tr>`}
         })
     }
     // money
@@ -243,89 +256,229 @@ function grabLocal() { // grabs character from localStorage and assigns all rele
     if(myChar.items.length > 0) {
         charItems.innerHTML = ''
         myChar.items.forEach(e=>{
+            if(e[0].length!=0) {
             charItems.innerHTML += `
                 <div>
 					<input type="number" placeholder="1" value="${e[0]}"/>
 					<input type="text" placeholder="Backpack" value="${e[1]}"/>
-				</div>`
+				</div>`}
         })
     }
-    
+    // trackers
+    if(myChar.trackers.length > 0) {
+        charTrackers.innerHTML = ''
+        myChar.trackers.forEach(e=>{
+            if(e[0].length!=0) {
+            charTrackers.innerHTML += `
+                <div>
+                    <input type="text" placeholder="Daily Use" value="${e[0]}"/>
+                    <input class="changing" type="number" placeholder="1" value="${e[1]}"/>
+                    <span>/</span>
+                    <input type="number" placeholder="1" value="${e[2]}"/>
+                </div>`}
+        })
+    }
+    // features
+    if(myChar.features.length > 0) {
+        charFeatures.innerHTML = ''
+        myChar.features.forEach(e=>{
+            if(e[0].length!=0) {
+            charFeatures.innerHTML += `
+                <div>
+                    <input type="text" placeholder="Feature" value="${e[0]}">
+                    <input type="text" class="featSource" placeholder="Source" value="${e[1]}">
+                    <textarea rows="4" placeholder="Description">${e[2]}</textarea>
+                </div>`}
+        })
+    }
+    // spellcasting
+    charSpellcasting.querySelector('#spellClass').value = myChar.spellcasting[0]
+    charSpellcasting.querySelector('#spellAbility').value = myChar.spellcasting[1]
+    charSpellcasting.querySelector('#spellSaveDC').value = myChar.spellcasting[2]
+    charSpellcasting.querySelector('#spellAtkBonus').value = myChar.spellcasting[3]
+    // spells-0
+    if(myChar.spells['Cantrips'].length > 0) {
+        charSpell0.innerHTML = ''
+        myChar.spells['Cantrips'].forEach(e=>{
+            if(e[0].length!=0) {
+            charSpell0.innerHTML += `
+                <div>
+                    <input type="text" placeholder="Spell" value="${e[0]}"/>
+                    <textarea placeholder="Description">${e[1]}</textarea>
+                </div>`}
+        })
+    }
+    // spells-1
+    if(myChar.spellslots['Level_1'].length > 0) {
+        let spell1Slots = [...charSpell1.previousElementSibling.querySelectorAll('input')]
+        spell1Slots.forEach((e,i)=>e.value = myChar.spellslots['Level_1'][i])
+    }
+    if(myChar.spells['Level_1'].length > 0) {
+        charSpell1.innerHTML = ''
+        myChar.spells['Level_1'].forEach(e=>{
+            if(e[1].length!=0) {
+            charSpell1.innerHTML += `
+            <div>
+                <input class="changing" type="checkbox"`+(e[0]?' checked' : '')+`/>
+                <input type="text" placeholder="Spell" value="${e[1]}">
+                <textarea placeholder="Description">${e[2]}</textarea>
+            </div>`}
+        })
+    }
+    // spells-2
+    if(myChar.spellslots['Level_2'].length > 0) {
+        let spell2Slots = [...charSpell2.previousElementSibling.querySelectorAll('input')]
+        spell2Slots.forEach((e,i)=>e.value = myChar.spellslots['Level_2'][i])
+    }
+    if(myChar.spells['Level_2'].length > 0) {
+        charSpell2.innerHTML = ''
+        myChar.spells['Level_2'].forEach(e=>{
+            if(e[1].length!=0) {
+            charSpell2.innerHTML += `
+            <div>
+                <input class="changing" type="checkbox"`+(e[0]?' checked' : '')+`/>
+                <input type="text" placeholder="Spell" value="${e[1]}">
+                <textarea placeholder="Description">${e[2]}</textarea>
+            </div>`}
+        })
+    }
+    // spells-3
+    if(myChar.spellslots['Level_3'].length > 0) {
+        let spell3Slots = [...charSpell3.previousElementSibling.querySelectorAll('input')]
+        spell3Slots.forEach((e,i)=>e.value = myChar.spellslots['Level_3'][i])
+    }
+    if(myChar.spells['Level_3'].length > 0) {
+        charSpell3.innerHTML = ''
+        myChar.spells['Level_3'].forEach(e=>{
+            if(e[1].length!=0) {
+            charSpell3.innerHTML += `
+            <div>
+                <input class="changing" type="checkbox"`+(e[0]?' checked' : '')+`/>
+                <input type="text" placeholder="Spell" value="${e[1]}">
+                <textarea placeholder="Description">${e[2]}</textarea>
+            </div>`}
+        })
+    }
+    // spells-4
+    if(myChar.spellslots['Level_4'].length > 0) {
+        let spell4Slots = [...charSpell4.previousElementSibling.querySelectorAll('input')]
+        spell4Slots.forEach((e,i)=>e.value = myChar.spellslots['Level_4'][i])
+    }
+    if(myChar.spells['Level_4'].length > 0) {
+        charSpell4.innerHTML = ''
+        myChar.spells['Level_4'].forEach(e=>{
+            if(e[1].length!=0) {
+            charSpell4.innerHTML += `
+            <div>
+                <input class="changing" type="checkbox"`+(e[0]?' checked' : '')+`/>
+                <input type="text" placeholder="Spell" value="${e[1]}">
+                <textarea placeholder="Description">${e[2]}</textarea>
+            </div>`}
+        })
+    }
+    // spells-5
+    if(myChar.spellslots['Level_5'].length > 0) {
+        let spell5Slots = [...charSpell5.previousElementSibling.querySelectorAll('input')]
+        spell5Slots.forEach((e,i)=>e.value = myChar.spellslots['Level_5'][i])
+    }
+    if(myChar.spells['Level_5'].length > 0) {
+        charSpell5.innerHTML = ''
+        myChar.spells['Level_5'].forEach(e=>{
+            if(e[1].length!=0) {
+            charSpell5.innerHTML += `
+            <div>
+                <input class="changing" type="checkbox"`+(e[0]?' checked' : '')+`/>
+                <input type="text" placeholder="Spell" value="${e[1]}">
+                <textarea placeholder="Description">${e[2]}</textarea>
+            </div>`}
+        })
+    }
+    // spells-6
+    if(myChar.spellslots['Level_6'].length > 0) {
+        let spell6Slots = [...charSpell6.previousElementSibling.querySelectorAll('input')]
+        spell6Slots.forEach((e,i)=>e.value = myChar.spellslots['Level_6'][i])
+    }
+    if(myChar.spells['Level_6'].length > 0) {
+        charSpell6.innerHTML = ''
+        myChar.spells['Level_6'].forEach(e=>{
+            if(e[1].length!=0) {
+            charSpell6.innerHTML += `
+            <div>
+                <input class="changing" type="checkbox"`+(e[0]?' checked' : '')+`/>
+                <input type="text" placeholder="Spell" value="${e[1]}">
+                <textarea placeholder="Description">${e[2]}</textarea>
+            </div>`}
+        })
+    }
+    // spells-7
+    if(myChar.spellslots['Level_7'].length > 0) {
+        let spell7Slots = [...charSpell7.previousElementSibling.querySelectorAll('input')]
+        spell7Slots.forEach((e,i)=>e.value = myChar.spellslots['Level_7'][i])
+    }
+    if(myChar.spells['Level_7'].length > 0) {
+        charSpell7.innerHTML = ''
+        myChar.spells['Level_7'].forEach(e=>{
+            if(e[1].length!=0) {
+            charSpell7.innerHTML += `
+            <div>
+                <input class="changing" type="checkbox"`+(e[0]?' checked' : '')+`/>
+                <input type="text" placeholder="Spell" value="${e[1]}">
+                <textarea placeholder="Description">${e[2]}</textarea>
+            </div>`}
+        })
+    }
+    // spells-8
+    if(myChar.spellslots['Level_8'].length > 0) {
+        let spell8Slots = [...charSpell8.previousElementSibling.querySelectorAll('input')]
+        spell8Slots.forEach((e,i)=>e.value = myChar.spellslots['Level_8'][i])
+    }
+    if(myChar.spells['Level_8'].length > 0) {
+        charSpell8.innerHTML = ''
+        myChar.spells['Level_8'].forEach(e=>{
+            if(e[1].length!=0) {
+            charSpell8.innerHTML += `
+            <div>
+                <input class="changing" type="checkbox"`+(e[0]?' checked' : '')+`/>
+                <input type="text" placeholder="Spell" value="${e[1]}">
+                <textarea placeholder="Description">${e[2]}</textarea>
+            </div>`}
+        })
+    }
+    // spells-9
+    if(myChar.spellslots['Level_9'].length > 0) {
+        let spell9Slots = [...charSpell9.previousElementSibling.querySelectorAll('input')]
+        spell9Slots.forEach((e,i)=>e.value = myChar.spellslots['Level_9'][i])
+    }
+    if(myChar.spells['Level_9'].length > 0) {
+        charSpell9.innerHTML = ''
+        myChar.spells['Level_9'].forEach(e=>{
+            if(e[1].length!=0) {
+            charSpell9.innerHTML += `
+            <div>
+                <input class="changing" type="checkbox"`+(e[0]?' checked' : '')+`/>
+                <input type="text" placeholder="Spell" value="${e[1]}">
+                <textarea placeholder="Description">${e[2]}</textarea>
+            </div>`}
+        })
+    }
+    // backstory
+    charBackstory.querySelector('textarea').value = myChar.backstory
+    // campaign notes
+    if(myChar.notes.length > 0) {
+        charNotes.innerHTML = ''
+        myChar.notes.forEach(e=>{
+            charNotes.innerHTML += `<textarea rows="4" placeholder="Rocks fell...">${e}</textarea>`
+        })
+    }
 
-    /////////////////////////////////////////////////
-    
-    // // trackers
-    // let trackerArray = [...charTrackers.querySelectorAll('div')]
-    // myChar.trackers = trackerArray.map(e=>[...e.querySelectorAll('input')].map(f=>f.value))
-    // // features
-    // let featureArray = [...charFeatures.querySelectorAll('div')]
-    // myChar.features = featureArray.map(e=>[...e.querySelectorAll('*')].map(f=>f.value))
-    // // spellcasting
-    // myChar.spellcasting = [
-    //     charSpellcasting.querySelector('#spellClass').value,
-    //     charSpellcasting.querySelector('#spellAbility').value,
-    //     charSpellcasting.querySelector('#spellSaveDC').value,
-    //     charSpellcasting.querySelector('#spellAtkBonus').value]
-    // // spells-0
-    // let cantripsArray = [...charSpell0.querySelectorAll('div')]
-    // myChar.spells['Cantrips'] = cantripsArray.map(e=>[e.querySelector('input').value,e.querySelector('textarea').value])
-    // // spells-1
-    // let spell1Slots = [...charSpell1.previousElementSibling.querySelectorAll('input')]
-    // let spell1Array = [...charSpell1.querySelectorAll('div')]
-    // myChar.spellslots['Level_1'] = spell1Slots.map(e=>e.value)
-    // myChar.spells['Level_1'] = spell1Array.map(e=>[e.querySelector('input[type=checkbox]').checked,e.querySelector('input[type=text]').value,e.querySelector('textarea').value])
-    // // spells-2
-    // let spell2Slots = [...charSpell2.previousElementSibling.querySelectorAll('input')]
-    // let spell2Array = [...charSpell2.querySelectorAll('div')]
-    // myChar.spellslots['Level_2'] = spell2Slots.map(e=>e.value)
-    // myChar.spells['Level_2'] = spell2Array.map(e=>[e.querySelector('input[type=checkbox]').checked,e.querySelector('input[type=text]').value,e.querySelector('textarea').value])
-    // // spells-3
-    // let spell3Slots = [...charSpell3.previousElementSibling.querySelectorAll('input')]
-    // let spell3Array = [...charSpell3.querySelectorAll('div')]
-    // myChar.spellslots['Level_3'] = spell3Slots.map(e=>e.value)
-    // myChar.spells['Level_3'] = spell3Array.map(e=>[e.querySelector('input[type=checkbox]').checked,e.querySelector('input[type=text]').value,e.querySelector('textarea').value])
-    // // spells-4
-    // let spell4Slots = [...charSpell4.previousElementSibling.querySelectorAll('input')]
-    // let spell4Array = [...charSpell4.querySelectorAll('div')]
-    // myChar.spellslots['Level_4'] = spell4Slots.map(e=>e.value)
-    // myChar.spells['Level_4'] = spell4Array.map(e=>[e.querySelector('input[type=checkbox]').checked,e.querySelector('input[type=text]').value,e.querySelector('textarea').value])
-    // // spells-5
-    // let spell5Slots = [...charSpell5.previousElementSibling.querySelectorAll('input')]
-    // let spell5Array = [...charSpell5.querySelectorAll('div')]
-    // myChar.spellslots['Level_5'] = spell5Slots.map(e=>e.value)
-    // myChar.spells['Level_5'] = spell5Array.map(e=>[e.querySelector('input[type=checkbox]').checked,e.querySelector('input[type=text]').value,e.querySelector('textarea').value])
-    // // spells-6
-    // let spell6Slots = [...charSpell6.previousElementSibling.querySelectorAll('input')]
-    // let spell6Array = [...charSpell6.querySelectorAll('div')]
-    // myChar.spellslots['Level_6'] = spell6Slots.map(e=>e.value)
-    // myChar.spells['Level_6'] = spell6Array.map(e=>[e.querySelector('input[type=checkbox]').checked,e.querySelector('input[type=text]').value,e.querySelector('textarea').value])
-    // // spells-7
-    // let spell7Slots = [...charSpell7.previousElementSibling.querySelectorAll('input')]
-    // let spell7Array = [...charSpell7.querySelectorAll('div')]
-    // myChar.spellslots['Level_7'] = spell7Slots.map(e=>e.value)
-    // myChar.spells['Level_7'] = spell7Array.map(e=>[e.querySelector('input[type=checkbox]').checked,e.querySelector('input[type=text]').value,e.querySelector('textarea').value])
-    // // spells-8
-    // let spell8Slots = [...charSpell8.previousElementSibling.querySelectorAll('input')]
-    // let spell8Array = [...charSpell8.querySelectorAll('div')]
-    // myChar.spellslots['Level_8'] = spell8Slots.map(e=>e.value)
-    // myChar.spells['Level_8'] = spell8Array.map(e=>[e.querySelector('input[type=checkbox]').checked,e.querySelector('input[type=text]').value,e.querySelector('textarea').value])
-    // // spells-9
-    // let spell9Slots = [...charSpell9.previousElementSibling.querySelectorAll('input')]
-    // let spell9Array = [...charSpell9.querySelectorAll('div')]
-    // myChar.spellslots['Level_9'] = spell9Slots.map(e=>e.value)
-    // myChar.spells['Level_9'] = spell9Array.map(e=>[e.querySelector('input[type=checkbox]').checked,e.querySelector('input[type=text]').value,e.querySelector('textarea').value])
-    // // backstory
-    // myChar.backstory = charBackstory.querySelector('textarea').value
-    // // campaign notes
-    // let notesArray = [...charNotes.querySelectorAll('textarea')]
-    // myChar.notes = notesArray.map(e=>e.value)
-
-    // console.log(myChar)
-    // localStorage.setItem('character',JSON.stringify(myChar))
+    updateDerivedValues()
 }
 
 function updateDerivedValues() { // default just the general stat modifiers (str, con, etc) to avoid interfering with temp / specific bonuses to saves or skills or w/e else, separate fn b/c might expand later
-
+    let stats = myChar.stats
+    stats = stats.map(e=>Math.floor((+e - 10)/2))
+    let statSpanArray = [...charStats.querySelectorAll('span')]
+    statSpanArray.forEach((e,i)=>e.innerHTML = stats[i] >= 0 ? '+'+stats[i] : stats[i])
 }
 
 function updateCharacter() { // updates myChar with entered info
@@ -454,6 +607,91 @@ function updateCharacter() { // updates myChar with entered info
     localStorage.setItem('character',JSON.stringify(myChar))
 }
 
+function importData() {
 
+}
+
+function exportData() {
+
+}
+
+function addOption() {
+    let str = event.target.id
+    console.log(str)
+    switch (str) {
+        case 'addClass':
+            charClasses.innerHTML += `
+                <div>
+                    <label>Class</label>
+                    <input type="text" placeholder="Warrior"/>
+                    <label>Level</label>
+                    <input type="number" placeholder="1"/>
+                </div>`
+            break;
+        case 'addHitDie':
+            charHitDice.innerHTML += `
+                <div>
+                    <input class="changing" type="number" placeholder="1"/>
+                    <input type="text" placeholder="1d10"/>
+                </div>`
+            break;
+        case 'addAttack':
+            charAttacks.querySelector('tbody').innerHTML += `
+                <tr>
+                    <td><input type="text" placeholder="Unarmed Strike"/></td>
+                    <td><input type="number" placeholder="2"/></td>
+                    <td><input type="text" placeholder="1d4+2 B"/></td>
+                </tr>`
+            break;
+        case 'addItem':
+            charItems.innerHTML += `
+                <div>
+                    <input type="number" placeholder="1"/>
+                    <input type="text" placeholder="Backpack"/>
+                </div>`
+            break;
+        case 'addTracker':
+            charTrackers.innerHTML += `
+                <div>
+                    <input type="text" placeholder="Daily Use"/>
+                    <input class="changing" type="number" placeholder="1"/>
+                    <span>/</span>
+                    <input type="number" placeholder="1"/>
+                </div>`
+            break;
+        case 'addFeature':
+            charFeatures.innerHTML += `
+                <div>
+                    <input type="text" placeholder="Feature">
+                    <input type="text" class="featSource" placeholder="Source">
+                    <textarea rows="4" placeholder="Description"></textarea>
+                </div>`
+            break;
+        case 'addNote':
+            charNotes.innerHTML += `<textarea rows="4" placeholder="Rocks fell..."></textarea>`
+            break;
+        case 'addCantrip':
+            charSpell0.innerHTML += `
+                <div>
+                    <input type="text" placeholder="Spell"/>
+                    <textarea placeholder="Description"></textarea>
+                </div>`
+            break;
+        default:
+            console.log('How the fuck?')
+    }
+}
+
+function addSpell() {
+    let wrapper = event.target.previousElementSibling
+    wrapper.innerHTML += `
+        <div>
+            <input class="changing" type="checkbox"/>
+            <input type="text" placeholder="Spell">
+            <textarea placeholder="Description"></textarea>
+        </div>`
+}
+
+/////////////////////////////////////////////////
 
 grabLocal()

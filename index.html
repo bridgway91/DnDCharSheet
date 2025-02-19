@@ -32,7 +32,7 @@
 						<label for="characterName">Character Name</label>
 						<input id="characterName" name="characterName" placeholder="John Smith"/>
 					</div>
-					<button type="button">Add Class</button>
+					<button id="addClass" type="button">Add Class</button>
 				</div>
 				<fieldset id="classes">
 					<div>
@@ -40,7 +40,6 @@
 						<input type="text" placeholder="Warrior"/>
 						<label>Level</label>
 						<input type="number" placeholder="1"/>
-						<!-- <button type="button" class="removeOption">-</button> -->
 					</div>
 				</fieldset>
 			</div>
@@ -350,7 +349,7 @@
 									</tr>
 								</tbody>
 							</table>
-							<button type="button" class="addOption">+</button>
+							<button id="addAttack" type="button" class="addOption">+</button>
 						</fieldset>
 					</div>
 					<div id="equipment">
@@ -389,7 +388,7 @@
 										<input type="text" placeholder="Backpack"/>
 									</div>
 								</div>
-								<button type="button" class="addOption">+</button>
+								<button id="addItem" type="button" class="addOption">+</button>
 							</div>
 						</fieldset>
 					</div>
@@ -413,7 +412,7 @@
 									<input type="number" placeholder="1"/>
 								</div>
 							</div>
-							<button type="button" class="addOption">+</button>
+							<button id="addTracker" type="button" class="addOption">+</button>
 						</fieldset>
 					</div>
 					<div>
@@ -426,7 +425,7 @@
 									<textarea rows="4" placeholder="Description"></textarea>
 								</div>
 							</div>
-							<button type="button" class="addOption">+</button>
+							<button id="addFeature" type="button" class="addOption">+</button>
 						</fieldset>
 					</div>
 				</section>
@@ -452,7 +451,7 @@
 							<textarea placeholder="Description"></textarea>
 						</div>
 					</div>
-					<button type="button" class="addOption">+</button>
+					<button id="addCantrip" type="button" class="addOption">+</button>
 				</fieldset>
 				<fieldset class="spells">
 					<legend>Level 1 : <input class="changing" type="number"/> / <input type="number"/></legend>
@@ -463,7 +462,7 @@
 							<textarea placeholder="Description"></textarea>
 						</div>
 					</div>
-					<button type="button" class="addOption">+</button>
+					<button type="button" class="addOption addSpell">+</button>
 				</fieldset>
 				<fieldset class="spells">
 					<legend>Level 2 : <input class="changing" type="number"/> / <input type="number"/></legend>
@@ -474,7 +473,7 @@
 							<textarea placeholder="Description"></textarea>
 						</div>
 					</div>
-					<button type="button" class="addOption">+</button>
+					<button type="button" class="addOption addSpell">+</button>
 				</fieldset>
 				<fieldset class="spells">
 					<legend>Level 3 : <input class="changing" type="number"/> / <input type="number"/></legend>
@@ -485,7 +484,7 @@
 							<textarea placeholder="Description"></textarea>
 						</div>
 					</div>
-					<button type="button" class="addOption">+</button>
+					<button type="button" class="addOption addSpell">+</button>
 				</fieldset>
 				<fieldset class="spells">
 					<legend>Level 4 : <input class="changing" type="number"/> / <input type="number"/></legend>
@@ -496,7 +495,7 @@
 							<textarea placeholder="Description"></textarea>
 						</div>
 					</div>
-					<button type="button" class="addOption">+</button>
+					<button type="button" class="addOption addSpell">+</button>
 				</fieldset>
 				<fieldset class="spells">
 					<legend>Level 5 : <input class="changing" type="number"/> / <input type="number"/></legend>
@@ -507,7 +506,7 @@
 							<textarea placeholder="Description"></textarea>
 						</div>
 					</div>
-					<button type="button" class="addOption">+</button>
+					<button type="button" class="addOption addSpell">+</button>
 				</fieldset>
 				<fieldset class="spells">
 					<legend>Level 6 : <input class="changing" type="number"/> / <input type="number"/></legend>
@@ -518,7 +517,7 @@
 							<textarea placeholder="Description"></textarea>
 						</div>
 					</div>
-					<button type="button" class="addOption">+</button>
+					<button type="button" class="addOption addSpell">+</button>
 				</fieldset>
 				<fieldset class="spells">
 					<legend>Level 7 : <input class="changing" type="number"/> / <input type="number"/></legend>
@@ -529,7 +528,7 @@
 							<textarea placeholder="Description"></textarea>
 						</div>
 					</div>
-					<button type="button" class="addOption">+</button>
+					<button type="button" class="addOption addSpell">+</button>
 				</fieldset>
 				<fieldset class="spells">
 					<legend>Level 8 : <input class="changing" type="number"/> / <input type="number"/></legend>
@@ -540,7 +539,7 @@
 							<textarea placeholder="Description"></textarea>
 						</div>
 					</div>
-					<button type="button" class="addOption">+</button>
+					<button type="button" class="addOption addSpell">+</button>
 				</fieldset>
 				<fieldset class="spells">
 					<legend>Level 9 : <input class="changing" type="number"/> / <input type="number"/></legend>
@@ -551,7 +550,7 @@
 							<textarea placeholder="Description"></textarea>
 						</div>
 					</div>
-					<button type="button" class="addOption">+</button>
+					<button type="button" class="addOption addSpell">+</button>
 				</fieldset>
 
 			</section>
@@ -566,7 +565,7 @@
 				<div id="campaignNotes">
 					<textarea rows="4" placeholder="Rocks fell..."></textarea>
 				</div>
-				<button class="changing" type="button" class="addOption">+</button>
+				<button id="addNote" class="changing" type="button" class="addOption">+</button>
 			</section>
 		</main>
 

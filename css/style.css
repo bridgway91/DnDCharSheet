@@ -103,14 +103,17 @@ header .group {
 }
 #classes div {
   display: flex;
+  /* grid-template-columns: 15% 45% 15% 15%; */
+  column-gap: 0.5rem;
   justify-content: space-between;
   align-items: center;
+  margin: 0.25rem 0;
 }
 #classes input[type='text'] {
-  width: 45%;
+  width: 100%;
 }
 #classes input[type='number'] {
-  width: 15%;
+  width: 100%;
   text-align: center;
 }
 .identifyingInfo {

@@ -315,17 +315,17 @@
 							<div>
 								<span>Success</span>
 								<div id="dsPass">
-									<input class="changing" type="checkbox"/>
-									<input class="changing" type="checkbox"/>
-									<input class="changing" type="checkbox"/>
+									<input id="p0" class="changing" type="checkbox"/>
+									<input id="p1" class="changing" type="checkbox"/>
+									<input id="p2" class="changing" type="checkbox"/>
 								</div>
 							</div>
 							<div>
 								<span>Fail</span>
 								<div id="dsFail">
-									<input class="changing" type="checkbox"/>
-									<input class="changing" type="checkbox"/>
-									<input class="changing" type="checkbox"/>
+									<input id="f0" class="changing" type="checkbox"/>
+									<input id="f1" class="changing" type="checkbox"/>
+									<input id="f2" class="changing" type="checkbox"/>
 								</div>
 							</div>
 						</fieldset>
@@ -368,11 +368,11 @@
 									</thead>
 									<tbody>
 										<tr>
-											<td><input class="changing" type="number" placeholder="0"/></td>
-											<td><input class="changing" type="number" placeholder="10"/></td>
-											<td><input class="changing" type="number" placeholder="0"/></td>
-											<td><input class="changing" type="number" placeholder="0"/></td>
-											<td><input class="changing" type="number" placeholder="0"/></td>
+											<td><input id="PP" class="changing" type="number" placeholder="0"/></td>
+											<td><input id="GP" class="changing" type="number" placeholder="10"/></td>
+											<td><input id="EP" class="changing" type="number" placeholder="0"/></td>
+											<td><input id="SP" class="changing" type="number" placeholder="0"/></td>
+											<td><input id="CP" class="changing" type="number" placeholder="0"/></td>
 										</tr>
 									</tbody>
 								</table>
@@ -454,7 +454,7 @@
 					<button id="addCantrip" type="button" class="addOption">+</button>
 				</fieldset>
 				<fieldset class="spells">
-					<legend>Level 1 : <input class="changing" type="number"/> / <input type="number"/></legend>
+					<legend>Level 1 : <input id="ss1" class="changing" type="number"/> / <input type="number"/></legend>
 					<div id="firstLvl">
 						<div>
 							<input class="changing" type="checkbox"/>
@@ -465,7 +465,7 @@
 					<button type="button" class="addOption addSpell">+</button>
 				</fieldset>
 				<fieldset class="spells">
-					<legend>Level 2 : <input class="changing" type="number"/> / <input type="number"/></legend>
+					<legend>Level 2 : <input id="ss2" class="changing" type="number"/> / <input type="number"/></legend>
 					<div id="secondLvl">
 						<div>
 							<input class="changing" type="checkbox"/>
@@ -476,7 +476,7 @@
 					<button type="button" class="addOption addSpell">+</button>
 				</fieldset>
 				<fieldset class="spells">
-					<legend>Level 3 : <input class="changing" type="number"/> / <input type="number"/></legend>
+					<legend>Level 3 : <input id="ss3" class="changing" type="number"/> / <input type="number"/></legend>
 					<div id="thirdLvl">
 						<div>
 							<input class="changing" type="checkbox"/>
@@ -487,7 +487,7 @@
 					<button type="button" class="addOption addSpell">+</button>
 				</fieldset>
 				<fieldset class="spells">
-					<legend>Level 4 : <input class="changing" type="number"/> / <input type="number"/></legend>
+					<legend>Level 4 : <input id="ss4" class="changing" type="number"/> / <input type="number"/></legend>
 					<div id="fourthLvl">
 						<div>
 							<input class="changing" type="checkbox"/>
@@ -498,7 +498,7 @@
 					<button type="button" class="addOption addSpell">+</button>
 				</fieldset>
 				<fieldset class="spells">
-					<legend>Level 5 : <input class="changing" type="number"/> / <input type="number"/></legend>
+					<legend>Level 5 : <input id="ss5" class="changing" type="number"/> / <input type="number"/></legend>
 					<div id="fifthLvl">
 						<div>
 							<input class="changing" type="checkbox"/>
@@ -509,7 +509,7 @@
 					<button type="button" class="addOption addSpell">+</button>
 				</fieldset>
 				<fieldset class="spells">
-					<legend>Level 6 : <input class="changing" type="number"/> / <input type="number"/></legend>
+					<legend>Level 6 : <input id="ss6" class="changing" type="number"/> / <input type="number"/></legend>
 					<div id="sixthLvl">
 						<div>
 							<input class="changing" type="checkbox"/>
@@ -520,7 +520,7 @@
 					<button type="button" class="addOption addSpell">+</button>
 				</fieldset>
 				<fieldset class="spells">
-					<legend>Level 7 : <input class="changing" type="number"/> / <input type="number"/></legend>
+					<legend>Level 7 : <input id="ss7" class="changing" type="number"/> / <input type="number"/></legend>
 					<div id="seventhLvl">
 						<div>
 							<input class="changing" type="checkbox"/>
@@ -531,7 +531,7 @@
 					<button type="button" class="addOption addSpell">+</button>
 				</fieldset>
 				<fieldset class="spells">
-					<legend>Level 8 : <input class="changing" type="number"/> / <input type="number"/></legend>
+					<legend>Level 8 : <input id="ss8" class="changing" type="number"/> / <input type="number"/></legend>
 					<div id="eighthLvl">
 						<div>
 							<input class="changing" type="checkbox"/>
@@ -542,7 +542,7 @@
 					<button type="button" class="addOption addSpell">+</button>
 				</fieldset>
 				<fieldset class="spells">
-					<legend>Level 9 : <input class="changing" type="number"/> / <input type="number"/></legend>
+					<legend>Level 9 : <input id="ss9" class="changing" type="number"/> / <input type="number"/></legend>
 					<div id="ninthLvl">
 						<div>
 							<input class="changing" type="checkbox"/>
@@ -561,7 +561,7 @@
 			</section>
 			<!-- Notes -->
 			<section class="notes group">
-				<h2>Campagin Notes</h2>
+				<h2>Campaign Notes</h2>
 				<div id="campaignNotes">
 					<textarea rows="4" placeholder="Rocks fell..."></textarea>
 				</div>

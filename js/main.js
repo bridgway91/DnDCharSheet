@@ -111,6 +111,9 @@ document.querySelector('#addCantrip').addEventListener('click',addOption)
 let levelledSpells = [...document.querySelectorAll('button')].filter(e=>e.classList.contains('addSpell'))
 levelledSpells.forEach(e=>e.addEventListener('click',addSpell))
 
+let changingInput = [...document.querySelectorAll('input')].filter(e=>e.classList.contains('changing'))
+changingInput.forEach(e=>e.addEventListener('change',autoUpdate))
+
 /////////////////////////////////////////////////
 
 function editOrSave() { // if wanting to edit, run editCharInfo(), or if saving, run saveCharInfo()
@@ -467,7 +470,8 @@ function grabLocal() { // grabs character from localStorage and assigns all rele
     if(myChar.notes.length > 0) {
         charNotes.innerHTML = ''
         myChar.notes.forEach(e=>{
-            charNotes.innerHTML += `<textarea rows="4" placeholder="Rocks fell...">${e}</textarea>`
+            if(e.length!=0) {
+            charNotes.innerHTML += `<textarea rows="4" placeholder="Rocks fell...">${e}</textarea>`}
         })
     }
 
@@ -618,64 +622,68 @@ function exportData() {
 function addOption() {
     let str = event.target.id
     console.log(str)
+    let newElement
     switch (str) {
         case 'addClass':
-            charClasses.innerHTML += `
-                <div>
-                    <label>Class</label>
-                    <input type="text" placeholder="Warrior"/>
-                    <label>Level</label>
-                    <input type="number" placeholder="1"/>
-                </div>`
+            newElement = document.createElement('div')
+            newElement.innerHTML = `
+                <label>Class</label>
+                <input type="text" placeholder="Warrior"/>
+                <label>Level</label>
+                <input type="number" placeholder="1"/>`
+            charClasses.appendChild(newElement)
             break;
         case 'addHitDie':
-            charHitDice.innerHTML += `
-                <div>
-                    <input class="changing" type="number" placeholder="1"/>
-                    <input type="text" placeholder="1d10"/>
-                </div>`
+            newElement = document.createElement('div')
+            newElement.innerHTML = `
+                <input class="changing" type="number" placeholder="1"/>
+                <input type="text" placeholder="1d10"/>`
+            charHitDice.appendChild(newElement)
             break;
         case 'addAttack':
-            charAttacks.querySelector('tbody').innerHTML += `
-                <tr>
-                    <td><input type="text" placeholder="Unarmed Strike"/></td>
-                    <td><input type="number" placeholder="2"/></td>
-                    <td><input type="text" placeholder="1d4+2 B"/></td>
-                </tr>`
+            newElement = document.createElement('tr')
+            newElement.innerHTML = `
+                <td><input type="text" placeholder="Unarmed Strike"/></td>
+                <td><input type="number" placeholder="2"/></td>
+                <td><input type="text" placeholder="1d4+2 B"/></td>`
+            charAttacks.querySelector('tbody').appendChild(newElement)
             break;
         case 'addItem':
-            charItems.innerHTML += `
-                <div>
-                    <input type="number" placeholder="1"/>
-                    <input type="text" placeholder="Backpack"/>
-                </div>`
+            newElement = document.createElement('div')
+            newElement.innerHTML = `
+                <input type="number" placeholder="1"/>
+                <input type="text" placeholder="Backpack"/>`
+            charItems.appendChild(newElement)
             break;
         case 'addTracker':
-            charTrackers.innerHTML += `
-                <div>
-                    <input type="text" placeholder="Daily Use"/>
-                    <input class="changing" type="number" placeholder="1"/>
-                    <span>/</span>
-                    <input type="number" placeholder="1"/>
-                </div>`
+            newElement = document.createElement('div')
+            newElement.innerHTML = `
+                <input type="text" placeholder="Daily Use"/>
+                <input class="changing" type="number" placeholder="1"/>
+                <span>/</span>
+                <input type="number" placeholder="1"/>`
+            charTrackers.appendChild(newElement)
             break;
         case 'addFeature':
-            charFeatures.innerHTML += `
-                <div>
-                    <input type="text" placeholder="Feature">
-                    <input type="text" class="featSource" placeholder="Source">
-                    <textarea rows="4" placeholder="Description"></textarea>
-                </div>`
+            newElement = document.createElement('div')
+            newElement.innerHTML = `
+                <input type="text" placeholder="Feature">
+                <input type="text" class="featSource" placeholder="Source">
+                <textarea rows="4" placeholder="Description"></textarea>`
+            charFeatures.appendChild(newElement)
             break;
         case 'addNote':
-            charNotes.innerHTML += `<textarea rows="4" placeholder="Rocks fell..."></textarea>`
+            newElement = document.createElement('textarea')
+            newElement.rows = 4
+            newElement.placeholder = "Rocks fell..."
+            charNotes.appendChild(newElement)
             break;
         case 'addCantrip':
-            charSpell0.innerHTML += `
-                <div>
-                    <input type="text" placeholder="Spell"/>
-                    <textarea placeholder="Description"></textarea>
-                </div>`
+            newElement = document.createElement('div')
+            newElement.innerHTML = `
+                <input type="text" placeholder="Spell"/>
+                <textarea placeholder="Description"></textarea>`
+            charSpell0.appendChild(newElement)
             break;
         default:
             console.log('How the fuck?')
@@ -684,12 +692,61 @@ function addOption() {
 
 function addSpell() {
     let wrapper = event.target.previousElementSibling
-    wrapper.innerHTML += `
-        <div>
-            <input class="changing" type="checkbox"/>
-            <input type="text" placeholder="Spell">
-            <textarea placeholder="Description"></textarea>
-        </div>`
+    let newElement = document.createElement('div')
+    newElement.innerHTML = `
+        <input class="changing" type="checkbox"/>
+        <input type="text" placeholder="Spell">
+        <textarea placeholder="Description"></textarea>`
+    wrapper.appendChild(newElement)
+}
+
+function autoUpdate() {
+    console.log(event.target)
+    let t = event.target.id || ''
+    // inspiration .. inp check
+    if(event.target.id='inspiration') {myChar.inspiration = event.target.checked}
+    // hp current .. inp num
+    if(event.target.id='hpCurrent') {myChar.healthCurrent = event.target.value}
+    // hp temp .. inp num
+    if(event.target.id='hpTemp') {myChar.healthTemp = event.target.value}
+    // hit dice current (will need to add EL's in grabLocal) .. inp num
+
+    // all death saves .. inp check
+    if(t[0]=='p') {myChar.deathSaves[0][+t[1]] = event.target.checked}
+    else if(t[0]=='f') {myChar.deathSaves[1][+t[1]] = event.target.checked}
+    // money .. inp num
+    if(t=='PP') {myChar.money[0] = event.target.value}
+    else if(t=='GP') {myChar.money[1] = event.target.value}
+    else if(t=='EP') {myChar.money[2] = event.target.value}
+    else if(t=='SP') {myChar.money[3] = event.target.value}
+    else if(t=='CP') {myChar.money[4] = event.target.value}
+    // trackers current-uses (will need to add EL's in grabLocal) .. inp num
+
+    // spell slots current .. inp num
+    if(t.slice(0,2)=='ss') {
+        switch (t.slice(-1)) {
+            case '1':
+                break;
+            case '2':
+                break;
+            case '3':
+                break;
+            case '4':
+                break;
+            case '5':
+                break;
+            case '6':
+                break;
+            case '7':
+                break;
+            case '8':
+                break;
+            case '9':
+                break;
+            default:
+                console.log('HOW?!')
+        }
+    }
 }
 
 /////////////////////////////////////////////////

@@ -22,6 +22,9 @@
 
 body {
   padding: 2rem;
+  background: #f5e1a4; /* A light yellow-beige color */
+  background-image: linear-gradient(45deg, rgba(255, 255, 255, 0.3) 25%, transparent 25%, transparent 75%, rgba(255, 255, 255, 0.3) 75%, rgba(255, 255, 255, 0.3)),
+                    linear-gradient(45deg, rgba(255, 255, 255, 0.3) 25%, transparent 25%, transparent 75%, rgba(255, 255, 255, 0.3));
 }
 .group {
   display: flex;
@@ -46,6 +49,9 @@ input::-webkit-outer-spin-button {
   align-items: center;
   box-shadow: 0 0 2px black;
 }
+fieldset legend {
+  text-shadow: 1px 1px 2px pink;
+}
 
 /******************************************
 /* ^ BASE STYLES
@@ -61,6 +67,7 @@ h1 {
   display: flex;
   justify-content: center;
   font-size: 3rem;
+  text-shadow: #FC0 1px 0 10px;
 }
 header .group {
   justify-content: space-between;
@@ -431,6 +438,7 @@ header .group {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
+  row-gap: 0.5rem;
 }
 #trackers div {
   padding: 0.5rem;
@@ -454,8 +462,9 @@ header .group {
 
 #features {
   display: flex;
-  flex-wrap: nowrap;
+  flex-wrap: wrap;
   justify-content: space-between;
+  row-gap: 0.5rem;
 }
 #features div {
   padding: 0.5rem;
@@ -466,6 +475,9 @@ header .group {
   flex-wrap: wrap;
   border: 1px solid gray;
 }
+#features div input:first-child {
+  font-weight: bold;
+}
 #features textarea {
   margin-top: 0.5rem;
   min-width: 100%;
@@ -475,6 +487,7 @@ header .group {
 }
 .featSource {
   text-align: end;
+  font-size: 0.8rem;
 }
 
 /******************************************

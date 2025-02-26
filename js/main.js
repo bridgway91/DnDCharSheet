@@ -137,15 +137,15 @@ function editCharInfo() { // enables editing all inputs
 }
 
 function saveCharInfo() { // 2 parts : closes off all info that doesn't change often from being edited, and saves all input info to myChar object (+ sets to localStorage)
+    updateCharacter()
+    updateDerivedValues()
+    
     const allInput = document.querySelectorAll('input')
     const allButton = document.querySelectorAll('button')
     const allTextarea = document.querySelectorAll('textarea')
     for (let i of allInput) {if(!i.classList.contains('changing')) {i.disabled = true}}
     for (let i of allButton) {if(!i.classList.contains('changing')) {i.disabled = true}}
     for (let i of allTextarea) {if(!i.classList.contains('changing')) {i.disabled = true}}
-
-    updateCharacter()
-    updateDerivedValues()
 }
 
 function grabLocal() { // grabs character from localStorage and assigns all relevant values to sheet
@@ -226,11 +226,13 @@ function grabLocal() { // grabs character from localStorage and assigns all rele
         charHitDice.innerHTML = ''
         myChar.hitDie.forEach(e=>{
             if(e[0].length!=0) {
-            charHitDice.innerHTML += `
-                <div>
-					<input class="changing" type="number" placeholder="1" value="${e[0]}"/>
-					<input type="text" placeholder="1d10" value="${e[1]}"/>
-				</div>`}
+            let newHitDie = document.createElement('div')
+            newHitDie.innerHTML = `
+                <input class="changing" type="number" placeholder="1" value="${e[0]}"/>
+                <input type="text" placeholder="1d10" value="${e[1]}"/>`
+            newHitDie.querySelector('input[type=number]').addEventListener('change',autoUpdate)
+            charHitDice.appendChild(newHitDie)
+            }
         })
     }
     // death saves
@@ -272,13 +274,15 @@ function grabLocal() { // grabs character from localStorage and assigns all rele
         charTrackers.innerHTML = ''
         myChar.trackers.forEach(e=>{
             if(e[0].length!=0) {
-            charTrackers.innerHTML += `
-                <div>
-                    <input type="text" placeholder="Daily Use" value="${e[0]}"/>
-                    <input class="changing" type="number" placeholder="1" value="${e[1]}"/>
-                    <span>/</span>
-                    <input type="number" placeholder="1" value="${e[2]}"/>
-                </div>`}
+            let newTracker = document.createElement('div')
+            newTracker.innerHTML = `
+                <input type="text" placeholder="Daily Use" value="${e[0]}"/>
+                <input class="changing" type="number" placeholder="1" value="${e[1]}"/>
+                <span>/</span>
+                <input type="number" placeholder="1" value="${e[2]}"/>`
+            newTracker.querySelector('input[type=number]').addEventListener('change',autoUpdate)
+            charTrackers.appendChild(newTracker)
+            }
         })
     }
     // features
@@ -490,7 +494,9 @@ function updateCharacter() { // updates myChar with entered info
     myChar.name = charName.value
     // classes
     let classDivsArray = [...charClasses.querySelectorAll('div')]
-    myChar.class = classDivsArray.map(e=>[...e.querySelectorAll('input')].map(f=>f.value))
+    myChar.class = classDivsArray
+                        .map(e=>[...e.querySelectorAll('input')].map(f=>f.value))
+                        .filter(e=>e.every(f=>f.length > 0))
     // characteristics
     myChar.characteristics = [charRace.value, charBackground.value,charAlignment.value,charAge.value,charHeight.value,charWeight.value,charEyes.value,charSkin.value,charHair.value]
     // stats
@@ -529,24 +535,34 @@ function updateCharacter() { // updates myChar with entered info
     myChar.healthTemp = charHealth.querySelector('#hpTemp').value
     // hit dice
     let hitDiceDivArray = [...charHitDice.querySelectorAll('div')]
-    myChar.hitDie = hitDiceDivArray.map(e=>[...e.querySelectorAll('input')].map(f=>f.value))
+    myChar.hitDie = hitDiceDivArray
+                        .map(e=>[...e.querySelectorAll('input')].map(f=>f.value))
+                        .filter(e=>e.every(f=>f.length > 0))
     // death saves
     myChar.deathSaves[0] = [...charDeathSaves.querySelector('#dsPass').querySelectorAll('input')].map(e=>e.checked)
     myChar.deathSaves[1] = [...charDeathSaves.querySelector('#dsFail').querySelectorAll('input')].map(e=>e.checked)
     // attacks
     let attacksArray = [...charAttacks.querySelector('tbody').querySelectorAll('tr')]
-    myChar.attacks = attacksArray.map(e=>[...e.querySelectorAll('input')].map(f=>f.value))
+    myChar.attacks = attacksArray
+                        .map(e=>[...e.querySelectorAll('input')].map(f=>f.value))
+                        .filter(e=>e.every(f=>f.length > 0))
     // money
     myChar.money = [...charMoney.querySelector('tbody').querySelectorAll('input')].map(e=>e.value)
     // items
     let itemsArray = [...charItems.querySelectorAll('div')]
-    myChar.items = itemsArray.map(e=>[...e.querySelectorAll('input')].map(f=>f.value))
+    myChar.items = itemsArray
+                    .map(e=>[...e.querySelectorAll('input')].map(f=>f.value))
+                    .filter(e=>e.every(f=>f.length > 0))
     // trackers
     let trackerArray = [...charTrackers.querySelectorAll('div')]
-    myChar.trackers = trackerArray.map(e=>[...e.querySelectorAll('input')].map(f=>f.value))
+    myChar.trackers = trackerArray
+                        .map(e=>[...e.querySelectorAll('input')].map(f=>f.value))
+                        .filter(e=>e.every(f=>f.length > 0))
     // features
     let featureArray = [...charFeatures.querySelectorAll('div')]
-    myChar.features = featureArray.map(e=>[...e.querySelectorAll('*')].map(f=>f.value))
+    myChar.features = featureArray
+                        .map(e=>[...e.querySelectorAll('*')].map(f=>f.value))
+                        .filter(e=>e.every(f=>f.length > 0))
     // spellcasting
     myChar.spellcasting = [
         charSpellcasting.querySelector('#spellClass').value,
@@ -555,68 +571,81 @@ function updateCharacter() { // updates myChar with entered info
         charSpellcasting.querySelector('#spellAtkBonus').value]
     // spells-0
     let cantripsArray = [...charSpell0.querySelectorAll('div')]
-    myChar.spells['Cantrips'] = cantripsArray.map(e=>[e.querySelector('input').value,e.querySelector('textarea').value])
+    myChar.spells['Cantrips'] = cantripsArray
+            .map(e=>[e.querySelector('input').value,e.querySelector('textarea').value])
+            .filter(e=>e.every(f=>f.length > 0))
     // spells-1
     let spell1Slots = [...charSpell1.previousElementSibling.querySelectorAll('input')]
     let spell1Array = [...charSpell1.querySelectorAll('div')]
     myChar.spellslots['Level_1'] = spell1Slots.map(e=>e.value)
-    myChar.spells['Level_1'] = spell1Array.map(e=>[e.querySelector('input[type=checkbox]').checked,e.querySelector('input[type=text]').value,e.querySelector('textarea').value])
+    myChar.spells['Level_1'] = spell1Array
+            .map(e=>[e.querySelector('input[type=checkbox]').checked,e.querySelector('input[type=text]').value,e.querySelector('textarea').value])
+            .filter(e=>e[1].length>0)
     // spells-2
     let spell2Slots = [...charSpell2.previousElementSibling.querySelectorAll('input')]
     let spell2Array = [...charSpell2.querySelectorAll('div')]
     myChar.spellslots['Level_2'] = spell2Slots.map(e=>e.value)
-    myChar.spells['Level_2'] = spell2Array.map(e=>[e.querySelector('input[type=checkbox]').checked,e.querySelector('input[type=text]').value,e.querySelector('textarea').value])
+    myChar.spells['Level_2'] = spell2Array
+            .map(e=>[e.querySelector('input[type=checkbox]').checked,e.querySelector('input[type=text]').value,e.querySelector('textarea').value])
+            .filter(e=>e[1].length>0)
     // spells-3
     let spell3Slots = [...charSpell3.previousElementSibling.querySelectorAll('input')]
     let spell3Array = [...charSpell3.querySelectorAll('div')]
     myChar.spellslots['Level_3'] = spell3Slots.map(e=>e.value)
-    myChar.spells['Level_3'] = spell3Array.map(e=>[e.querySelector('input[type=checkbox]').checked,e.querySelector('input[type=text]').value,e.querySelector('textarea').value])
+    myChar.spells['Level_3'] = spell3Array
+            .map(e=>[e.querySelector('input[type=checkbox]').checked,e.querySelector('input[type=text]').value,e.querySelector('textarea').value])
+            .filter(e=>e[1].length>0)
     // spells-4
     let spell4Slots = [...charSpell4.previousElementSibling.querySelectorAll('input')]
     let spell4Array = [...charSpell4.querySelectorAll('div')]
     myChar.spellslots['Level_4'] = spell4Slots.map(e=>e.value)
-    myChar.spells['Level_4'] = spell4Array.map(e=>[e.querySelector('input[type=checkbox]').checked,e.querySelector('input[type=text]').value,e.querySelector('textarea').value])
+    myChar.spells['Level_4'] = spell4Array
+            .map(e=>[e.querySelector('input[type=checkbox]').checked,e.querySelector('input[type=text]').value,e.querySelector('textarea').value])
+            .filter(e=>e[1].length>0)
     // spells-5
     let spell5Slots = [...charSpell5.previousElementSibling.querySelectorAll('input')]
     let spell5Array = [...charSpell5.querySelectorAll('div')]
     myChar.spellslots['Level_5'] = spell5Slots.map(e=>e.value)
-    myChar.spells['Level_5'] = spell5Array.map(e=>[e.querySelector('input[type=checkbox]').checked,e.querySelector('input[type=text]').value,e.querySelector('textarea').value])
+    myChar.spells['Level_5'] = spell5Array
+            .map(e=>[e.querySelector('input[type=checkbox]').checked,e.querySelector('input[type=text]').value,e.querySelector('textarea').value])
+            .filter(e=>e[1].length>0)
     // spells-6
     let spell6Slots = [...charSpell6.previousElementSibling.querySelectorAll('input')]
     let spell6Array = [...charSpell6.querySelectorAll('div')]
     myChar.spellslots['Level_6'] = spell6Slots.map(e=>e.value)
-    myChar.spells['Level_6'] = spell6Array.map(e=>[e.querySelector('input[type=checkbox]').checked,e.querySelector('input[type=text]').value,e.querySelector('textarea').value])
+    myChar.spells['Level_6'] = spell6Array
+            .map(e=>[e.querySelector('input[type=checkbox]').checked,e.querySelector('input[type=text]').value,e.querySelector('textarea').value])
+            .filter(e=>e[1].length>0)
     // spells-7
     let spell7Slots = [...charSpell7.previousElementSibling.querySelectorAll('input')]
     let spell7Array = [...charSpell7.querySelectorAll('div')]
     myChar.spellslots['Level_7'] = spell7Slots.map(e=>e.value)
-    myChar.spells['Level_7'] = spell7Array.map(e=>[e.querySelector('input[type=checkbox]').checked,e.querySelector('input[type=text]').value,e.querySelector('textarea').value])
+    myChar.spells['Level_7'] = spell7Array
+            .map(e=>[e.querySelector('input[type=checkbox]').checked,e.querySelector('input[type=text]').value,e.querySelector('textarea').value])
+            .filter(e=>e[1].length>0)
     // spells-8
     let spell8Slots = [...charSpell8.previousElementSibling.querySelectorAll('input')]
     let spell8Array = [...charSpell8.querySelectorAll('div')]
     myChar.spellslots['Level_8'] = spell8Slots.map(e=>e.value)
-    myChar.spells['Level_8'] = spell8Array.map(e=>[e.querySelector('input[type=checkbox]').checked,e.querySelector('input[type=text]').value,e.querySelector('textarea').value])
+    myChar.spells['Level_8'] = spell8Array
+            .map(e=>[e.querySelector('input[type=checkbox]').checked,e.querySelector('input[type=text]').value,e.querySelector('textarea').value])
+            .filter(e=>e[1].length>0)
     // spells-9
     let spell9Slots = [...charSpell9.previousElementSibling.querySelectorAll('input')]
     let spell9Array = [...charSpell9.querySelectorAll('div')]
     myChar.spellslots['Level_9'] = spell9Slots.map(e=>e.value)
-    myChar.spells['Level_9'] = spell9Array.map(e=>[e.querySelector('input[type=checkbox]').checked,e.querySelector('input[type=text]').value,e.querySelector('textarea').value])
+    myChar.spells['Level_9'] = spell9Array
+            .map(e=>[e.querySelector('input[type=checkbox]').checked,e.querySelector('input[type=text]').value,e.querySelector('textarea').value])
+            .filter(e=>e[1].length>0)
     // backstory
     myChar.backstory = charBackstory.querySelector('textarea').value
     // campaign notes
     let notesArray = [...charNotes.querySelectorAll('textarea')]
     myChar.notes = notesArray.map(e=>e.value)
 
-    console.log(myChar)
     localStorage.setItem('character',JSON.stringify(myChar))
-}
-
-function importData() {
-
-}
-
-function exportData() {
-
+    console.log(myChar)
+    grabLocal()
 }
 
 function addOption() {
@@ -625,6 +654,7 @@ function addOption() {
     let newElement
     switch (str) {
         case 'addClass':
+            myChar.class.push(['',''])
             newElement = document.createElement('div')
             newElement.innerHTML = `
                 <label>Class</label>
@@ -634,13 +664,16 @@ function addOption() {
             charClasses.appendChild(newElement)
             break;
         case 'addHitDie':
+            myChar.hitDie.push(['',''])
             newElement = document.createElement('div')
             newElement.innerHTML = `
                 <input class="changing" type="number" placeholder="1"/>
                 <input type="text" placeholder="1d10"/>`
+            newElement.querySelector('input[type=number]').addEventListener('change',autoUpdate)
             charHitDice.appendChild(newElement)
             break;
         case 'addAttack':
+            myChar.attacks.push(['','',''])
             newElement = document.createElement('tr')
             newElement.innerHTML = `
                 <td><input type="text" placeholder="Unarmed Strike"/></td>
@@ -649,6 +682,7 @@ function addOption() {
             charAttacks.querySelector('tbody').appendChild(newElement)
             break;
         case 'addItem':
+            myChar.items.push(['',''])
             newElement = document.createElement('div')
             newElement.innerHTML = `
                 <input type="number" placeholder="1"/>
@@ -656,15 +690,18 @@ function addOption() {
             charItems.appendChild(newElement)
             break;
         case 'addTracker':
+            myChar.trackers.push(['','',''])
             newElement = document.createElement('div')
             newElement.innerHTML = `
                 <input type="text" placeholder="Daily Use"/>
                 <input class="changing" type="number" placeholder="1"/>
                 <span>/</span>
                 <input type="number" placeholder="1"/>`
+            newElement.querySelector('input[type=number]').addEventListener('change',autoUpdate)
             charTrackers.appendChild(newElement)
             break;
         case 'addFeature':
+            myChar.features.push(['','',''])
             newElement = document.createElement('div')
             newElement.innerHTML = `
                 <input type="text" placeholder="Feature">
@@ -673,12 +710,14 @@ function addOption() {
             charFeatures.appendChild(newElement)
             break;
         case 'addNote':
+            myChar.notes.push([''])
             newElement = document.createElement('textarea')
             newElement.rows = 4
             newElement.placeholder = "Rocks fell..."
             charNotes.appendChild(newElement)
             break;
         case 'addCantrip':
+            myChar.spells['Cantrips'].push(['',''])
             newElement = document.createElement('div')
             newElement.innerHTML = `
                 <input type="text" placeholder="Spell"/>
@@ -688,6 +727,7 @@ function addOption() {
         default:
             console.log('How the fuck?')
     }
+    console.log(myChar)
 }
 
 function addSpell() {
@@ -701,7 +741,6 @@ function addSpell() {
 }
 
 function autoUpdate() {
-    console.log(event.target)
     let t = event.target.id || ''
     // inspiration .. inp check
     if(event.target.id='inspiration') {myChar.inspiration = event.target.checked}
@@ -710,7 +749,11 @@ function autoUpdate() {
     // hp temp .. inp num
     if(event.target.id='hpTemp') {myChar.healthTemp = event.target.value}
     // hit dice current (will need to add EL's in grabLocal) .. inp num
-
+    if(event.target.parentElement.parentElement.id == 'hitDiceWrapper') {
+        let thisHitDie = event.target.parentElement
+        let thisIndex = [...thisHitDie.parentElement.querySelectorAll('div')].indexOf(thisHitDie)
+        myChar.hitDie[thisIndex][0] = event.target.value
+    }
     // all death saves .. inp check
     if(t[0]=='p') {myChar.deathSaves[0][+t[1]] = event.target.checked}
     else if(t[0]=='f') {myChar.deathSaves[1][+t[1]] = event.target.checked}
@@ -721,32 +764,53 @@ function autoUpdate() {
     else if(t=='SP') {myChar.money[3] = event.target.value}
     else if(t=='CP') {myChar.money[4] = event.target.value}
     // trackers current-uses (will need to add EL's in grabLocal) .. inp num
-
+    if(event.target.parentElement.parentElement.id == 'trackers') {
+        let thisTracker = event.target.parentElement
+        let thisIndex = [...thisTracker.parentElement.querySelectorAll('div')].indexOf(thisTracker)
+        myChar.trackers[thisIndex][1] = event.target.value
+    }
     // spell slots current .. inp num
     if(t.slice(0,2)=='ss') {
         switch (t.slice(-1)) {
             case '1':
+                myChar.spellslots['Level_1'][0] = event.target.value
                 break;
             case '2':
+                myChar.spellslots['Level_2'][0] = event.target.value
                 break;
             case '3':
+                myChar.spellslots['Level_3'][0] = event.target.value
                 break;
             case '4':
+                myChar.spellslots['Level_4'][0] = event.target.value
                 break;
             case '5':
+                myChar.spellslots['Level_5'][0] = event.target.value
                 break;
             case '6':
+                myChar.spellslots['Level_6'][0] = event.target.value
                 break;
             case '7':
+                myChar.spellslots['Level_7'][0] = event.target.value
                 break;
             case '8':
+                myChar.spellslots['Level_8'][0] = event.target.value
                 break;
             case '9':
+                myChar.spellslots['Level_9'][0] = event.target.value
                 break;
             default:
                 console.log('HOW?!')
         }
     }
+}
+
+function importData() {
+
+}
+
+function exportData() {
+
 }
 
 /////////////////////////////////////////////////

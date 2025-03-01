@@ -19,8 +19,9 @@
 					<button class="changing" type="button" id="edit">SAVE</button> <!--switches between edit/save -->
 				</div>
 				<div>
-					<button class="changing" type="button" id="importChar">IMPORT</button>
+					<button class="changing" type="file" onclick="document.getElementById('importChar').click()">IMPORT</button>
 					<button class="changing" type="button" id="exportChar">EXPORT</button>
+					<input type='file' id="importChar" accept=".json" style="display:none">
 				</div>
 			</section>
 		</header>

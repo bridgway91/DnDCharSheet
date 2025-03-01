@@ -36,7 +36,7 @@ class Character {
 let myChar = localStorage.getItem('character')
     ? JSON.parse(localStorage.getItem('character'))
     : new Character()
-console.log(myChar)
+// console.log(myChar)
 
 /////////////////////////////////////////////////
 
@@ -96,7 +96,7 @@ const charNotes = document.querySelector('#campaignNotes')
 /////////////////////////////////////////////////
 
 editInfo.addEventListener('click',editOrSave)
-imChar.addEventListener('click',importData)
+imChar.addEventListener('change',importData)
 exChar.addEventListener('click',exportData)
 
 document.querySelector('#addClass').addEventListener('click',addOption)
@@ -124,7 +124,7 @@ function editOrSave() { // if wanting to edit, run editCharInfo(), or if saving,
         editCharInfo()
         editInfo.innerHTML = 'SAVE'
     }
-    console.log(myChar)
+    // console.log(myChar)
 }
 
 function editCharInfo() { // enables editing all inputs
@@ -644,13 +644,13 @@ function updateCharacter() { // updates myChar with entered info
     myChar.notes = notesArray.map(e=>e.value)
 
     localStorage.setItem('character',JSON.stringify(myChar))
-    console.log(myChar)
+    // console.log(myChar)
     grabLocal()
 }
 
 function addOption() {
     let str = event.target.id
-    console.log(str)
+    // console.log(str)
     let newElement
     switch (str) {
         case 'addClass':
@@ -727,7 +727,7 @@ function addOption() {
         default:
             console.log('How the fuck?')
     }
-    console.log(myChar)
+    // console.log(myChar)
 }
 
 function addSpell() {
@@ -743,11 +743,11 @@ function addSpell() {
 function autoUpdate() {
     let t = event.target.id || ''
     // inspiration .. inp check
-    if(event.target.id='inspiration') {myChar.inspiration = event.target.checked}
+    if(event.target.id=='inspiration') {myChar.inspiration = event.target.checked}
     // hp current .. inp num
-    if(event.target.id='hpCurrent') {myChar.healthCurrent = event.target.value}
+    if(event.target.id=='hpCurrent') {myChar.healthCurrent = event.target.value}
     // hp temp .. inp num
-    if(event.target.id='hpTemp') {myChar.healthTemp = event.target.value}
+    if(event.target.id=='hpTemp') {myChar.healthTemp = event.target.value}
     // hit dice current (will need to add EL's in grabLocal) .. inp num
     if(event.target.parentElement.parentElement.id == 'hitDiceWrapper') {
         let thisHitDie = event.target.parentElement
@@ -806,11 +806,36 @@ function autoUpdate() {
 }
 
 function importData() {
-
+    // console.log('importing')
+    let importedData = {}
+    const file = event.target.files[0]
+    if (file && file.type==='application/json') {
+        const reader = new FileReader()
+        reader.onload = function(e) {
+            try {
+                importedData = JSON.parse(e.target.result)
+                // console.log('Data loaded: ', importedData)
+                myChar = importedData
+                localStorage.setItem('character',JSON.stringify(myChar))
+                grabLocal()
+            } catch {
+                alert('There was an error parsing the file as JSON!')
+            }
+        }
+        reader.readAsText(file)
+    } else {
+        alert('Please upload a valid JSON file.')
+    }
 }
 
 function exportData() {
-
+    // console.log('exporting')
+    const myCharExport = JSON.stringify(myChar, null, 1)
+    const blob = new Blob([myCharExport], { type: 'application/json' })
+    const link = document.createElement('a')
+    link.href = URL.createObjectURL(blob)
+    link.download = `${myChar.name || 'unknown_char'}.json`
+    link.click()
 }
 
 /////////////////////////////////////////////////

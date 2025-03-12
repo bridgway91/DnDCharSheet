@@ -6,7 +6,7 @@ class Character {
         this.stats = [] // length=6 : str, dex, con, int, wis, cha
         this.inspiration = false
         this.proficiency = 2
-        this.saves = [] // length=6 -- [[boolean if prof, # bonus],...]
+        this.saves = [[false,0],[false,0],[false,0],[false,0],[false,0],[false,0]] // length=6 -- [[boolean if prof, # bonus],...]
         this.skills = [] // array of skills, NOT BOOLEAN, instead 0/1/2 for * prof bonus (to account for expertise) -- [[0/1/2, # bonus],...]
         this.weapons = '' // strings of weapon names, tho mainly simple / martial
         this.armor = ''
@@ -290,12 +290,14 @@ function grabLocal() { // grabs character from localStorage and assigns all rele
         charFeatures.innerHTML = ''
         myChar.features.forEach(e=>{
             if(e[0].length!=0) {
-            charFeatures.innerHTML += `
-                <div>
+                let newFeature = document.createElement('div')
+                newFeature.innerHTML += `
                     <input type="text" placeholder="Feature" value="${e[0]}">
                     <input type="text" class="featSource" placeholder="Source" value="${e[1]}">
-                    <textarea rows="4" placeholder="Description">${e[2]}</textarea>
-                </div>`}
+                    <textarea rows="4" placeholder="Description">${e[2]}</textarea>`
+                newFeature.addEventListener('click',hideOrShow)
+                charFeatures.appendChild(newFeature)
+            }
         })
     }
     // spellcasting
@@ -308,11 +310,13 @@ function grabLocal() { // grabs character from localStorage and assigns all rele
         charSpell0.innerHTML = ''
         myChar.spells['Cantrips'].forEach(e=>{
             if(e[0].length!=0) {
-            charSpell0.innerHTML += `
-                <div>
+                let newSpell0 = document.createElement('div')
+                newSpell0.innerHTML = `
                     <input type="text" placeholder="Spell" value="${e[0]}"/>
-                    <textarea placeholder="Description">${e[1]}</textarea>
-                </div>`}
+                    <textarea placeholder="Description">${e[1]}</textarea>`
+                newSpell0.addEventListener('click',hideOrShow)
+                charSpell0.appendChild(newSpell0)
+            }
         })
     }
     // spells-1
@@ -324,12 +328,14 @@ function grabLocal() { // grabs character from localStorage and assigns all rele
         charSpell1.innerHTML = ''
         myChar.spells['Level_1'].forEach(e=>{
             if(e[1].length!=0) {
-            charSpell1.innerHTML += `
-            <div>
-                <input class="changing" type="checkbox"`+(e[0]?' checked' : '')+`/>
-                <input type="text" placeholder="Spell" value="${e[1]}">
-                <textarea placeholder="Description">${e[2]}</textarea>
-            </div>`}
+                let newSpell1 = document.createElement('div')
+                newSpell1.innerHTML = `
+                    <input class="changing" type="checkbox"`+(e[0]?' checked' : '')+`/>
+                    <input type="text" placeholder="Spell" value="${e[1]}">
+                    <textarea placeholder="Description">${e[2]}</textarea>`
+                newSpell1.addEventListener('click',hideOrShow)
+                charSpell1.appendChild(newSpell1)
+            }
         })
     }
     // spells-2
@@ -341,12 +347,14 @@ function grabLocal() { // grabs character from localStorage and assigns all rele
         charSpell2.innerHTML = ''
         myChar.spells['Level_2'].forEach(e=>{
             if(e[1].length!=0) {
-            charSpell2.innerHTML += `
-            <div>
-                <input class="changing" type="checkbox"`+(e[0]?' checked' : '')+`/>
-                <input type="text" placeholder="Spell" value="${e[1]}">
-                <textarea placeholder="Description">${e[2]}</textarea>
-            </div>`}
+                let newSpell2 = document.createElement('div')
+                newSpell2.innerHTML = `
+                    <input class="changing" type="checkbox"`+(e[0]?' checked' : '')+`/>
+                    <input type="text" placeholder="Spell" value="${e[1]}">
+                    <textarea placeholder="Description">${e[2]}</textarea>`
+                newSpell2.addEventListener('click',hideOrShow)
+                charSpell2.appendChild(newSpell2)
+            }
         })
     }
     // spells-3
@@ -358,12 +366,14 @@ function grabLocal() { // grabs character from localStorage and assigns all rele
         charSpell3.innerHTML = ''
         myChar.spells['Level_3'].forEach(e=>{
             if(e[1].length!=0) {
-            charSpell3.innerHTML += `
-            <div>
-                <input class="changing" type="checkbox"`+(e[0]?' checked' : '')+`/>
-                <input type="text" placeholder="Spell" value="${e[1]}">
-                <textarea placeholder="Description">${e[2]}</textarea>
-            </div>`}
+                let newSpell3 = document.createElement('div')
+                newSpell3.innerHTML = `
+                    <input class="changing" type="checkbox"`+(e[0]?' checked' : '')+`/>
+                    <input type="text" placeholder="Spell" value="${e[1]}">
+                    <textarea placeholder="Description">${e[2]}</textarea>`
+                newSpell3.addEventListener('click',hideOrShow)
+                charSpell3.appendChild(newSpell3)
+            }
         })
     }
     // spells-4
@@ -375,12 +385,14 @@ function grabLocal() { // grabs character from localStorage and assigns all rele
         charSpell4.innerHTML = ''
         myChar.spells['Level_4'].forEach(e=>{
             if(e[1].length!=0) {
-            charSpell4.innerHTML += `
-            <div>
-                <input class="changing" type="checkbox"`+(e[0]?' checked' : '')+`/>
-                <input type="text" placeholder="Spell" value="${e[1]}">
-                <textarea placeholder="Description">${e[2]}</textarea>
-            </div>`}
+                let newSpell4 = document.createElement('div')
+                newSpell4.innerHTML = `
+                    <input class="changing" type="checkbox"`+(e[0]?' checked' : '')+`/>
+                    <input type="text" placeholder="Spell" value="${e[1]}">
+                    <textarea placeholder="Description">${e[2]}</textarea>`
+                newSpell4.addEventListener('click',hideOrShow)
+                charSpell4.appendChild(newSpell4)
+            }
         })
     }
     // spells-5
@@ -392,12 +404,14 @@ function grabLocal() { // grabs character from localStorage and assigns all rele
         charSpell5.innerHTML = ''
         myChar.spells['Level_5'].forEach(e=>{
             if(e[1].length!=0) {
-            charSpell5.innerHTML += `
-            <div>
-                <input class="changing" type="checkbox"`+(e[0]?' checked' : '')+`/>
-                <input type="text" placeholder="Spell" value="${e[1]}">
-                <textarea placeholder="Description">${e[2]}</textarea>
-            </div>`}
+                let newSpell5 = document.createElement('div')
+                newSpell5.innerHTML = `
+                    <input class="changing" type="checkbox"`+(e[0]?' checked' : '')+`/>
+                    <input type="text" placeholder="Spell" value="${e[1]}">
+                    <textarea placeholder="Description">${e[2]}</textarea>`
+                newSpell5.addEventListener('click',hideOrShow)
+                charSpell5.appendChild(newSpell5)
+            }
         })
     }
     // spells-6
@@ -409,12 +423,14 @@ function grabLocal() { // grabs character from localStorage and assigns all rele
         charSpell6.innerHTML = ''
         myChar.spells['Level_6'].forEach(e=>{
             if(e[1].length!=0) {
-            charSpell6.innerHTML += `
-            <div>
-                <input class="changing" type="checkbox"`+(e[0]?' checked' : '')+`/>
-                <input type="text" placeholder="Spell" value="${e[1]}">
-                <textarea placeholder="Description">${e[2]}</textarea>
-            </div>`}
+                let newSpell6 = document.createElement('div')
+                newSpell6.innerHTML = `
+                    <input class="changing" type="checkbox"`+(e[0]?' checked' : '')+`/>
+                    <input type="text" placeholder="Spell" value="${e[1]}">
+                    <textarea placeholder="Description">${e[2]}</textarea>`
+                newSpell6.addEventListener('click',hideOrShow)
+                charSpell6.appendChild(newSpell6)
+            }
         })
     }
     // spells-7
@@ -426,12 +442,14 @@ function grabLocal() { // grabs character from localStorage and assigns all rele
         charSpell7.innerHTML = ''
         myChar.spells['Level_7'].forEach(e=>{
             if(e[1].length!=0) {
-            charSpell7.innerHTML += `
-            <div>
-                <input class="changing" type="checkbox"`+(e[0]?' checked' : '')+`/>
-                <input type="text" placeholder="Spell" value="${e[1]}">
-                <textarea placeholder="Description">${e[2]}</textarea>
-            </div>`}
+                let newSpell7 = document.createElement('div')
+                newSpell7.innerHTML = `
+                    <input class="changing" type="checkbox"`+(e[0]?' checked' : '')+`/>
+                    <input type="text" placeholder="Spell" value="${e[1]}">
+                    <textarea placeholder="Description">${e[2]}</textarea>`
+                newSpell7.addEventListener('click',hideOrShow)
+                charSpell7.appendChild(newSpell7)
+            }
         })
     }
     // spells-8
@@ -443,12 +461,14 @@ function grabLocal() { // grabs character from localStorage and assigns all rele
         charSpell8.innerHTML = ''
         myChar.spells['Level_8'].forEach(e=>{
             if(e[1].length!=0) {
-            charSpell8.innerHTML += `
-            <div>
-                <input class="changing" type="checkbox"`+(e[0]?' checked' : '')+`/>
-                <input type="text" placeholder="Spell" value="${e[1]}">
-                <textarea placeholder="Description">${e[2]}</textarea>
-            </div>`}
+                let newSpell8 = document.createElement('div')
+                newSpell8.innerHTML = `
+                    <input class="changing" type="checkbox"`+(e[0]?' checked' : '')+`/>
+                    <input type="text" placeholder="Spell" value="${e[1]}">
+                    <textarea placeholder="Description">${e[2]}</textarea>`
+                newSpell8.addEventListener('click',hideOrShow)
+                charSpell8.appendChild(newSpell8)
+            }
         })
     }
     // spells-9
@@ -460,12 +480,14 @@ function grabLocal() { // grabs character from localStorage and assigns all rele
         charSpell9.innerHTML = ''
         myChar.spells['Level_9'].forEach(e=>{
             if(e[1].length!=0) {
-            charSpell9.innerHTML += `
-            <div>
-                <input class="changing" type="checkbox"`+(e[0]?' checked' : '')+`/>
-                <input type="text" placeholder="Spell" value="${e[1]}">
-                <textarea placeholder="Description">${e[2]}</textarea>
-            </div>`}
+                let newSpell9 = document.createElement('div')
+                newSpell9.innerHTML = `
+                    <input class="changing" type="checkbox"`+(e[0]?' checked' : '')+`/>
+                    <input type="text" placeholder="Spell" value="${e[1]}">
+                    <textarea placeholder="Description">${e[2]}</textarea>`
+                newSpell9.addEventListener('click',hideOrShow)
+                charSpell9.appendChild(newSpell9)
+            }
         })
     }
     // backstory
@@ -707,6 +729,7 @@ function addOption() {
                 <input type="text" placeholder="Feature">
                 <input type="text" class="featSource" placeholder="Source">
                 <textarea rows="4" placeholder="Description"></textarea>`
+            newElement.addEventListener('click',hideOrShow)
             charFeatures.appendChild(newElement)
             break;
         case 'addNote':
@@ -722,6 +745,7 @@ function addOption() {
             newElement.innerHTML = `
                 <input type="text" placeholder="Spell"/>
                 <textarea placeholder="Description"></textarea>`
+            newElement.addEventListener('click',hideOrShow)
             charSpell0.appendChild(newElement)
             break;
         default:
@@ -737,6 +761,7 @@ function addSpell() {
         <input class="changing" type="checkbox"/>
         <input type="text" placeholder="Spell">
         <textarea placeholder="Description"></textarea>`
+    newElement.addEventListener('click',hideOrShow)
     wrapper.appendChild(newElement)
 }
 
@@ -836,6 +861,15 @@ function exportData() {
     link.href = URL.createObjectURL(blob)
     link.download = `${myChar.name || 'unknown_char'}.json`
     link.click()
+}
+
+function hideOrShow() {
+    if(event.target.tagName == 'DIV') {
+        let height = event.target.parentElement.id == 'features' ? '2.25rem' : '1.75rem'
+        event.target.style.height = event.target.style.height == height
+            ? 'fit-content'
+            : height
+    }
 }
 
 /////////////////////////////////////////////////

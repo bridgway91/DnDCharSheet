@@ -100,11 +100,11 @@ header .group {
 }
 .nameClasses > div input {
   text-align: center;
-  width: 100%;
+  width: 90%;
 }
 #classes {
   width: 100%;
-  padding: 1rem;
+  padding: 0.5rem;
   margin-top: 1rem;
   border: 1px solid black;
   box-shadow: 0 0 5px black;
@@ -180,13 +180,21 @@ header .group {
 #columns {
   display: flex;
   justify-content: space-between;
+  flex-wrap: wrap;
 }
 
 .skillsProficiencies,
-.combatEquip,
-.trackfeatures {
-  width: 33%;
+.combatEquip {
+  width: 49%;
   flex-wrap: wrap;
+}
+.trackfeatures {
+  width: 100%;
+  flex-wrap: wrap;
+}
+.skillsProficiencies {
+  flex-direction: column;
+  justify-content: flex-start;
 }
 .skillsProficiencies fieldset {
   border: 1px solid black;
@@ -454,12 +462,13 @@ header .group {
 #trackers {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-around;
+  justify-content: space-evenly;
+  column-gap: 0.5rem;
   row-gap: 0.5rem;
 }
 #trackers div {
   padding: 0.5rem;
-  width: 45%;
+  width: 24%;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
@@ -480,23 +489,29 @@ header .group {
 #features {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
+  justify-content: space-evenly;
   row-gap: 0.5rem;
 }
 #features div {
   padding: 0.5rem;
-  width: 100%;
+  width: 49%;
   display: flex;
   justify-content: space-between;
   align-items: center;
   flex-wrap: wrap;
   border: 1px solid gray;
+  row-gap: 0.1rem;
+  overflow: hidden;
+  cursor: pointer;
 }
 #features input {
   width: min(100%, 10rem);
 }
 #features div input:first-child {
   font-weight: bold;
+}
+#features div input:nth-child(2) {
+  font-style: italic;
 }
 #features textarea {
   margin-top: 0.5rem;
@@ -562,6 +577,8 @@ header .group {
   padding-bottom: 0.5rem;
   margin-bottom: 0.25rem;
   border-bottom: 1px solid gray;
+  overflow: hidden;
+  cursor: pointer;
 }
 .spells div:last-child {
   border-bottom: none;

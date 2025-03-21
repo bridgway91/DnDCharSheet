@@ -7,7 +7,7 @@ class Character {
         this.inspiration = false
         this.proficiency = 2
         this.saves = [[false,0],[false,0],[false,0],[false,0],[false,0],[false,0]] // length=6 -- [[boolean if prof, # bonus],...]
-        this.skills = [] // array of skills, NOT BOOLEAN, instead 0/1/2 for * prof bonus (to account for expertise) -- [[0/1/2, # bonus],...]
+        this.skills = [[0,''],[0,''],[0,''],[0,''],[0,''],[0,''],[0,''],[0,''],[0,''],[0,''],[0,''],[0,''],[0,''],[0,''],[0,''],[0,''],[0,'']] // array of skills, NOT BOOLEAN, instead 0/1/2 for * prof bonus (to account for expertise) -- [[0/1/2, # bonus],...]
         this.weapons = '' // strings of weapon names, tho mainly simple / martial
         this.armor = ''
         this.tools = ''
@@ -41,6 +41,7 @@ let myChar = localStorage.getItem('character')
 /////////////////////////////////////////////////
 
 const editInfo = document.querySelector('#edit')
+const resetInfo = document.querySelector('#reset')
 const imChar = document.querySelector('#importChar')
 const exChar = document.querySelector('#exportChar')
 
@@ -96,6 +97,7 @@ const charNotes = document.querySelector('#campaignNotes')
 /////////////////////////////////////////////////
 
 editInfo.addEventListener('click',editOrSave)
+resetInfo.addEventListener('click',resetCheck)
 imChar.addEventListener('change',importData)
 exChar.addEventListener('click',exportData)
 
@@ -830,6 +832,23 @@ function autoUpdate() {
     }
 }
 
+function resetCheck() {
+    let proceed = confirm('This will clear the current sheet and erase all saved data. Are you sure?')
+    if(proceed) {resetSheet()}
+}
+function resetSheet() {
+    let resetText = document.querySelectorAll('input[type=text]')
+    let resetNums = document.querySelectorAll('input[type=number]')
+    let resetArea = document.querySelectorAll('textarea')
+    let resetSkills = [...charSkills.querySelectorAll('input[value=normal]')]
+    resetText.forEach(e=>e.value='')
+    resetNums.forEach(e=>e.value='')
+    resetArea.forEach(e=>e.value='')
+    resetSkills.forEach(e=>e.checked = true)
+    updateCharacter()
+    updateDerivedValues()
+}
+
 function importData() {
     // console.log('importing')
     let importedData = {}
@@ -838,6 +857,7 @@ function importData() {
         const reader = new FileReader()
         reader.onload = function(e) {
             try {
+                resetSheet()
                 importedData = JSON.parse(e.target.result)
                 // console.log('Data loaded: ', importedData)
                 myChar = importedData
